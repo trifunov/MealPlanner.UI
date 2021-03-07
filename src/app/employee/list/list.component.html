@@ -1,0 +1,23 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>RFID</th>
+      <th>Company</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of employees">
+      <td>{{ item.username }}</td>
+      <td>{{ item.rfid }}</td>
+      <td>{{ item.companyName }}</td>
+      <td>
+        <div class="row remove-margin">
+          <button class="btn btn-warning button-icon-padding table-button-margin" (click)="createEdit(item.id, item.userId)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-employee-createedit></app-employee-createedit>

@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\employee",
+    "\\src\\app\\employee\\list",
+    "\\src\\app\\meal",
+    "\\src\\app\\meal\\createedit",
+    "\\src\\app\\meal\\list",
+    "\\src\\app\\plan",
+    "\\src\\app\\plan\\list"
+  ],
+  "SelectedNode": "\\src\\app\\order\\create\\create.component.ts",
+  "PreviewInSolutionExplorer": false
+}

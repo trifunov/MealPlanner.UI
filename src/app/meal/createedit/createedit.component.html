@@ -1,0 +1,79 @@
+<div *ngIf="showCreateEditPopUpById > -1" class="modal">
+  <div class="modal-content">
+    <div class="col-xs-12 col-lg-10 offset-lg-1">
+      <div class="col-lg-12 div-createedit-fields">
+        <input required class="form-control input-margin" placeholder="Meal Name" [(ngModel)]="name" />
+        <input class="form-control input-margin" placeholder="Meal Foreign Name" [(ngModel)]="nameForeign" />
+        <input class="input-margin" type="file" (change)="fileChangeEvent($event)" />
+
+        <div class="array-main-div input-margin">
+          <ng-container *ngFor="let item of ingredients; let i = index;">
+            <div class="row">
+              <div class="col-lg-5">
+                <ng-select class="input-margin" [items]="initIngredients"
+                           bindLabel="name"
+                           bindValue="name"
+                           [addTag]="true"
+                           (change)="onChangeIngredient($event,i)"
+                           [(ngModel)]="ingredients[i].name">
+                </ng-select>
+                <!--<input required class="form-control input-margin" placeholder="Ingredient Name" [(ngModel)]="" />-->
+              </div>
+              <div class="col-lg-5">
+                <input required class="form-control input-margin" placeholder="Ingredient Foreign Name" [(ngModel)]="ingredients[i].nameForeign" />
+              </div>
+              <div class="col-lg-2">
+                <button class="btn btn-danger" (click)="removeIngredient(i)"><i class="fa fa-minus"></i></button>
+              </div>
+            </div>
+          </ng-container>
+          <button class="btn btn-primary" (click)="addIngredient()"><i class="fa fa-plus"></i><span class="button-span-create">ADD INGREDIENT</span></button>
+        </div>
+
+        <div class="array-main-div input-margin">
+          <ng-container *ngFor="let item of allergens; let i = index;">
+            <div class="row">
+              <div class="col-lg-5">
+                <ng-select class="input-margin" [items]="initAllergens"
+                           bindLabel="name"
+                           bindValue="name"
+                           [addTag]="true"
+                           (change)="onChangeAllergen($event,i)"
+                           [(ngModel)]="allergens[i].name">
+                </ng-select>
+                <!--<input required class="form-control input-margin" placeholder="Allergen Name" [(ngModel)]="allergens[i].name" />-->
+              </div>
+              <div class="col-lg-5">
+                <input required class="form-control input-margin" placeholder="Allergen Foreign Name" [(ngModel)]="allergens[i].nameForeign" />
+              </div>
+              <div class="col-lg-2">
+                <button class="btn btn-danger" (click)="removeAllergen(i)"><i class="fa fa-minus"></i></button>
+              </div>
+            </div>
+          </ng-container>
+          <button class="btn btn-primary" (click)="addAllergen()"><i class="fa fa-plus"></i><span class="button-span-create">ADD ALLERGEN</span></button>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="col-xs-12 col-lg-4 offset-lg-4 buttons-group">
+          <div class="row">
+            <div class="col-lg-6">
+              <button class="btn btn-success" (click)="proceed(true)"><i class="fa fa-check"></i><span class="button-span-create">SAVE</span></button>
+            </div>
+            <div class="col-lg-6">
+              <button class="btn btn-danger" (click)="proceed(false)"><i class="fa fa-times"></i><span class="button-span-create">CANCEL</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="successfulSave == true">
+  <div class="notification-main">
+    <div class="col-lg-11"><i class="fa fa-check"></i>Successfully saved </div>
+    <div class="col-lg-1">
+    </div>
+  </div>
+</div>

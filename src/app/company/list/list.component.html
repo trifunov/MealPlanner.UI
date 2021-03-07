@@ -1,0 +1,26 @@
+<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">CREATE</span></button>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Employees</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of companies">
+      <td>{{ item.id }}</td>
+      <td>{{ item.name }}</td>
+      <td><a href="/employee/list?companyId={{ item.id }}">{{ item.totalEmployees }}</a></td>
+      <td>
+        <div class="row remove-margin">
+          <button class="btn btn-warning button-icon-padding table-button-margin" (click)="edit(item.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <button class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<app-company-createedit></app-company-createedit>
+<app-company-delete></app-company-delete>

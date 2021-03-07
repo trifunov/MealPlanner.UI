@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-md bg-light navbar-light">
+  <a class="navbar-brand" href="/company/list">
+    <!--<img src="../../../assets/images/USPoliticsBrand.png" class="brand-image" />-->
+    <span>Meal Planner</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/company/list">Company</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/employee/list?companyId=0">Employee</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/meal/list">Meal</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/plan/list">Plan</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/order/create">Order</a>
+      </li>
+    </ul>
+
+    <ul *ngIf="loggedInUser.isLoggedIn == false" class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/account/register">Register</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/account/login">Log in</a>
+      </li>
+    </ul>
+
+    <ul *ngIf="loggedInUser.isLoggedIn == true" class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#"> <i class="fa fa-user"></i> {{ loggedInUser.username }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/account/login" (click)="logout()">Log out</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>

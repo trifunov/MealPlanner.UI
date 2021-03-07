@@ -1,0 +1,80 @@
+<div class="row input-margin">
+  <div class="remove-padding">
+    <button class="btn btn-primary button-smaller-padding" (click)="changeDates(-(elementsToShow+1))">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </button>
+  </div>
+  <ng-container *ngFor="let item of dates; let i = index;">
+    <div *ngIf="item.hidden !== true" class="col-lg-2 col-md-2 col-5 col-sm-5 remove-padding button-smaller-padding">
+      <button class="btn" [ngClass]="{'btn-default': selectedDate !== item.value, 'btn-primary': selectedDate === item.value }" (click)="selectDate(item)">
+        {{item.label}}
+      </button>
+    </div>
+  </ng-container>
+  <div class="remove-padding">
+    <button class="btn btn-primary button-smaller-padding" (click)="changeDates(elementsToShow+1)">
+      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+<div class="row input-margin container-flex">
+  <ng-container *ngFor="let item of shifts; let i = index;">
+    <div class="col-lg-2 col-12 remove-padding button-smaller-padding">
+      <button class="btn" [ngClass]="{'btn-default': selectedShift !== item.id, 'btn-primary': selectedShift === item.id }" (click)="selectShift(item)">
+        {{item.name}}
+      </button>
+    </div>
+  </ng-container>
+</div>
+<div class="row input-margin container-flex">
+  <ng-container *ngFor="let item of meals; let i = index;">
+    <div class="card col-lg-3 col-md-4 col-sm-12 col-12 cursor-pointer" (click)="createOrder(item.id)" [ngClass]="{'selected-meal': selectedMeal === item.id }">
+      <div *ngIf="selectedMeal === item.id" class="selected-meal-icon">
+        <button class="btn btn-success disabled rounded-circle remove-padding"><i class="fa fa-check" aria-hidden="true"></i></button>
+      </div>
+      <img class="card-img-top" style="height: 260px;" src="{{item.imageBase64}}" alt="Card image cap">
+      <div class="card-body">
+        <div class="row remove-padding">
+          <div class="col-6 button-smaller-padding" style="text-align:left;">
+            <h5 class="card-title">{{ item.name }}</h5>
+          </div>
+          <div class="col-6 button-smaller-padding" style="text-align:right;">
+            <h5 class="card-title">{{ item.nameForeign }}</h5>
+          </div>
+        </div>
+        <div class="row remove-padding">
+          <div class="col-6 button-smaller-padding" style="text-align:left;">
+            <h6 class="card-subtitle mb-2 text-muted">
+              <ng-container *ngFor="let ingredient of item.ingredients; let i = index;">
+                {{ ingredient.name }}<span *ngIf="i < item.ingredients.length-1">,</span>
+              </ng-container>
+            </h6>
+          </div>
+          <div class="col-6 button-smaller-padding" style="text-align:right;">
+            <h6 class="card-subtitle mb-2 text-muted">
+              <ng-container *ngFor="let ingredient of item.ingredients; let i = index;">
+                {{ ingredient.nameForeign }}<span *ngIf="i < item.ingredients.length-1">,</span>
+              </ng-container>
+            </h6>
+          </div>
+        </div>
+        <div class="row remove-padding">
+          <div class="col-6 button-smaller-padding" style="text-align:left;">
+            <p class="card-text">
+              <ng-container *ngFor="let allergen of item.allergens; let i = index;">
+                {{ allergen.name }}<span *ngIf="i < item.allergens.length-1">,</span>
+              </ng-container>
+            </p>
+          </div>
+          <div class="col-6 button-smaller-padding" style="text-align:right;">
+            <p class="card-text">
+              <ng-container *ngFor="let allergen of item.allergens; let i = index;">
+                {{ allergen.nameForeign }}<span *ngIf="i < item.allergens.length-1">,</span>
+              </ng-container>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

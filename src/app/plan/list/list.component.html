@@ -1,0 +1,32 @@
+<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">CREATE</span></button>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Active from</th>
+      <th>Active to</th>
+      <th>Editable from</th>
+      <th>Editable to</th>
+      <th>Shifts</th>
+      <th>Total meals</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of plans">
+      <td>{{ convertDateToMomentString(item.activeFrom) }}</td>
+      <td>{{ convertDateToMomentString(item.activeTo) }}</td>
+      <td>{{ convertDateToMomentString(item.editableFrom) }}</td>
+      <td>{{ convertDateToMomentString(item.editableTo) }}</td>
+      <td>
+        <span *ngFor="let shift of item.shiftNames">{{ shift }}<br /></span>
+      </td>
+      <td><a href="/plan/createedit?ids={{ item.ids }}">{{ item.totalMeals }}</a></td>
+      <td>
+        <div class="row remove-margin">
+          <button class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.ids)"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+      </td>
+      </tr>
+  </tbody>
+</table>
+<app-plan-delete></app-plan-delete>
