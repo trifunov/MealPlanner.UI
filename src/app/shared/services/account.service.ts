@@ -34,16 +34,36 @@ export class AccountService {
   login(username, password) {
     this.http.post<any>(this.baseUrl + "/account/login", { username: username, password: password }).subscribe(data => {
       localStorage.setItem('token', data.token);
-      var loggedInUser = { isLoggedIn: true, email: '', username: username };
+      var loggedInUser = {
+        isLoggedIn: true,
+        email: '',
+        username: data.username,
+        role: data.role
+      };
       localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
       this.loggedInSource.next(loggedInUser);
       this.router.navigateByUrl('company/list');
     });
   }
 
+  loginRfid(rfid) {
+    this.http.post<any>(this.baseUrl + "/account/loginrfid", { rfid: rfid }).subscribe(data => {
+      localStorage.setItem('token', data.token);
+      var loggedInUser = {
+        isLoggedIn: true,
+        email: '',
+        username: data.username,
+        role: data.role
+      };
+      localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+      this.loggedInSource.next(loggedInUser);
+      this.router.navigateByUrl('order/create');
+    });
+  }
+
   logout() {
     localStorage.removeItem('token');
-    var loggedInUser = { isLoggedIn: false, email: '', username: '' };
+    var loggedInUser = { isLoggedIn: false, email: '', username: '', role: '' };
     localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
     this.loggedInSource.next(loggedInUser);
   }

@@ -5,6 +5,7 @@ export class Meal {
   name: string;
   nameForeign: string;
   imageBase64: string;
+  planId: number;
   ingredients: CommonName[];
   allergens: CommonName[];
 }

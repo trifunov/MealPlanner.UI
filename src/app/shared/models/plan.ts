@@ -4,8 +4,7 @@ export class Plan {
   shiftNames: string[];
   editableFrom: string;
   editableTo: string;
-  activeFrom: string;
-  activeTo: string;
+  date: string;
   companyId: number;
   mealIds: number[];
   totalMeals: number;

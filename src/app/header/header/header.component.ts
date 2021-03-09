@@ -20,6 +20,6 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.accountService.logout();
-    this.router.navigateByUrl("account/login");
+    this.router.navigateByUrl("account/loginrfid");
   }
 }

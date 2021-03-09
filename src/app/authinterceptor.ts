@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
           switch (error.status) {
             case 401:      //login
               this.accountService.logout();
-              this.router.navigateByUrl("account/login");
+              this.router.navigateByUrl("account/loginrfid");
               break;
             case 403:     //forbidden
               this.router.navigateByUrl("account/unauthorized");

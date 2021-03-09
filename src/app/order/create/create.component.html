@@ -28,8 +28,8 @@
 </div>
 <div class="row input-margin container-flex">
   <ng-container *ngFor="let item of meals; let i = index;">
-    <div class="card col-lg-3 col-md-4 col-sm-12 col-12 cursor-pointer" (click)="createOrder(item.id)" [ngClass]="{'selected-meal': selectedMeal === item.id }">
-      <div *ngIf="selectedMeal === item.id" class="selected-meal-icon">
+    <div class="card col-lg-4 col-md-4 col-sm-12 col-12 cursor-pointer" (click)="createOrder(item.planId)" [ngClass]="{'selected-meal': selectedPlan === item.planId }">
+      <div *ngIf="selectedPlan === item.planId" class="selected-meal-icon">
         <button class="btn btn-success disabled rounded-circle remove-padding"><i class="fa fa-check" aria-hidden="true"></i></button>
       </div>
       <img class="card-img-top" style="height: 260px;" src="{{item.imageBase64}}" alt="Card image cap">

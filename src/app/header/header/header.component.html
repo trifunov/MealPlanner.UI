@@ -10,28 +10,28 @@
 
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/company/list">Company</a>
+        <a class="nav-link" href="/company/list">Компанија</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/employee/list?companyId=0">Employee</a>
+        <a class="nav-link" href="/employee/list?companyId=0">Вработен</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/meal/list">Meal</a>
+        <a class="nav-link" href="/meal/list">Оброк</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/plan/list">Plan</a>
+        <a class="nav-link" href="/plan/list">План</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/order/create">Order</a>
+        <a class="nav-link" href="/order/create">Нарачка</a>
       </li>
     </ul>
 
     <ul *ngIf="loggedInUser.isLoggedIn == false" class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/account/register">Register</a>
+        <a class="nav-link" href="/account/register">Регистрација</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/account/login">Log in</a>
+        <a class="nav-link" href="/account/loginrfid">Најава</a>
       </li>
     </ul>
 
@@ -40,7 +40,7 @@
         <a class="nav-link" href="#"> <i class="fa fa-user"></i> {{ loggedInUser.username }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/account/login" (click)="logout()">Log out</a>
+        <a class="nav-link" href="/account/loginrfid" (click)="logout()">Одјава</a>
       </li>
     </ul>
 

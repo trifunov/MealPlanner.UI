@@ -2,8 +2,7 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Active from</th>
-      <th>Active to</th>
+      <th>Active date</th>
       <th>Editable from</th>
       <th>Editable to</th>
       <th>Shifts</th>
@@ -13,8 +12,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of plans">
-      <td>{{ convertDateToMomentString(item.activeFrom) }}</td>
-      <td>{{ convertDateToMomentString(item.activeTo) }}</td>
+      <td>{{ convertDateToMomentString(item.date) }}</td>
       <td>{{ convertDateToMomentString(item.editableFrom) }}</td>
       <td>{{ convertDateToMomentString(item.editableTo) }}</td>
       <td>

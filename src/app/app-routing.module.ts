@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginRfidComponent } from './account/login-rfid/login-rfid.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ListComponent } from './company/list/list.component';
@@ -12,6 +13,7 @@ import { ListPlanComponent } from './plan/list/list.component';
 
 const routes: Routes = [
   { path: 'account/login', component: LoginComponent },
+  { path: 'account/loginrfid', component: LoginRfidComponent },
   { path: 'account/register', component: RegisterComponent },
   { path: 'company/list', component: ListComponent },
   { path: 'employee/list', component: ListEmployeeComponent },

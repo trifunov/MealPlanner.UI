@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AccountService } from '../shared/services/account.service';
+import { LoginRfidComponent } from './login-rfid/login-rfid.component';
 
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent],
+  declarations: [RegisterComponent, LoginComponent, LoginRfidComponent],
   imports: [
     CommonModule,
     FormsModule

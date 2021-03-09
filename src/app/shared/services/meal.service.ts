@@ -15,7 +15,7 @@ export class MealService {
   public showDeletePopUpById = new BehaviorSubject(0);
   public showCreateEditPopUpById = new BehaviorSubject(-1);
 
-  private mealToEditSource = new BehaviorSubject<Meal>({ id: -1, name: '', nameForeign: '', imageBase64: '', allergens: [], ingredients: [] });
+  private mealToEditSource = new BehaviorSubject<Meal>({ id: -1, name: '', nameForeign: '', imageBase64: '', allergens: [], ingredients: [], planId: -1 });
   mealToEditObs = this.mealToEditSource.asObservable();
 
   private mealGetAllSource = new BehaviorSubject<Meal[]>([]);

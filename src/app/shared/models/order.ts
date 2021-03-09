@@ -1,11 +1,10 @@
-import { Meal } from './meal';
+import { Plan } from './plan';
 
 export class Order {
   id: number;
-  date: string;
   isDelivered: boolean;
   shift: number;
-  mealId: number;
-  meal: Meal;
+  planId: number;
+  plan: Plan;
   employeeId: number;
 }

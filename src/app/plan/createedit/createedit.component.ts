@@ -16,8 +16,7 @@ export class CreateeditPlanComponent implements OnInit {
 
   ids: string;
   meals: Meal[];
-  activeFrom: string;
-  activeTo: string;
+  date: string;
   editableFrom: string;
   editableTo: string;
   mealIds: number[];
@@ -31,8 +30,7 @@ export class CreateeditPlanComponent implements OnInit {
     });
 
     this.planService.planToEditObs.subscribe((data) => {
-      this.activeFrom = moment(data.activeFrom).format('YYYY-MM-DD');
-      this.activeTo = moment(data.activeTo).format('YYYY-MM-DD');
+      this.date = moment(data.date).format('YYYY-MM-DD');
       this.editableFrom = moment(data.editableFrom).format('YYYY-MM-DD');
       this.editableTo = moment(data.editableTo).format('YYYY-MM-DD');
       this.mealIds = data.mealIds;
@@ -59,8 +57,7 @@ export class CreateeditPlanComponent implements OnInit {
   }
 
   prepareForCreatePlan() {
-    this.activeFrom = moment().format('YYYY-MM-DD');
-    this.activeTo = moment().format('YYYY-MM-DD');
+    this.date = moment().format('YYYY-MM-DD');
     this.editableFrom = moment().format('YYYY-MM-DD');
     this.editableTo = moment().format('YYYY-MM-DD');
     this.mealIds = [];
@@ -71,8 +68,7 @@ export class CreateeditPlanComponent implements OnInit {
     if (toSave === true) {
       var plan = new Plan();
       plan.ids = this.ids.split(',').map(Number);
-      plan.activeFrom = this.activeFrom;
-      plan.activeTo = this.activeTo;
+      plan.date = this.date;
       plan.editableFrom = this.editableFrom;
       plan.editableTo = this.editableTo;
       plan.shifts = this.shifts;

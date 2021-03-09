@@ -18,7 +18,7 @@ export class CreateOrderComponent implements OnInit {
   shifts = [];
   selectedDate: string;
   selectedShift: number = -1;
-  selectedMeal: number = -1;
+  selectedPlan: number = -1;
   elementsToShow: number = 4;
   dateFormatPresentation: string = 'dddd DD MMM YY';
 
@@ -83,15 +83,14 @@ export class CreateOrderComponent implements OnInit {
     }
   }
 
-  createOrder(mealId: number) {
+  createOrder(planId: number) {
     var order = new Order();
-    order.date = this.selectedDate;
     order.shift = this.selectedShift;
     order.isDelivered = false;
-    order.mealId = mealId;
+    order.planId = planId;
 
     this.orderService.create(order).subscribe(data => {
-      this.selectedMeal = mealId;
+      this.selectedPlan = planId;
     });
   }
 }
