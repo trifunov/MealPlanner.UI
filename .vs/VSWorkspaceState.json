@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\employee",
-    "\\src\\app\\employee\\list",
-    "\\src\\app\\meal",
-    "\\src\\app\\meal\\createedit",
-    "\\src\\app\\meal\\list",
-    "\\src\\app\\plan",
-    "\\src\\app\\plan\\list"
+    "\\src\\app\\account",
+    "\\src\\app\\account\\login-rfid",
+    "\\src\\app\\account\\register",
+    "\\src\\app\\header",
+    "\\src\\app\\header\\header",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\services"
   ],
-  "SelectedNode": "\\src\\app\\order\\create\\create.component.ts",
+  "SelectedNode": "\\src\\app\\account\\login-rfid\\login-rfid.component.html",
   "PreviewInSolutionExplorer": false
 }

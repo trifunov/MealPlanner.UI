@@ -1,9 +1,13 @@
+<div class="row">
+  <div class="col-lg-3 col-6"><h4>Вработени за {{ companyName }}</h4></div>
+  <div class="col-lg-3 col-6"><button class="btn btn-primary button-create-company" (click)="createEdit(0)"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">ДОДАДИ</span></button></div>
+</div>
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Username</th>
+      <th>Корисничко име</th>
       <th>RFID</th>
-      <th>Company</th>
+      <th>Улога</th>
       <th></th>
     </tr>
   </thead>
@@ -11,10 +15,11 @@
     <tr *ngFor="let item of employees">
       <td>{{ item.username }}</td>
       <td>{{ item.rfid }}</td>
-      <td>{{ item.companyName }}</td>
+      <td>{{ item.role }}</td>
       <td>
         <div class="row remove-margin">
-          <button class="btn btn-warning button-icon-padding table-button-margin" (click)="createEdit(item.id, item.userId)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <button class="btn btn-warning button-icon-padding table-button-margin" (click)="createEdit(item.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <!--<button class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.id, item.userId)"><i class="fa fa-times" aria-hidden="true"></i></button>-->
         </div>
       </td>
     </tr>

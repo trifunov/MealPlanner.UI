@@ -16,9 +16,14 @@ export class CreateeditComponent implements OnInit {
   showCreateEditPopUpById: number;
   successfulSave: boolean;
   companies: Company[];
+  roles = [];
 
   rfid: string = "";
   companyId: number = 0;
+  username: string = "";
+  role: string = "";
+  email: string = "";
+  password: string = "";
   userId: string = "";
 
   constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private companyService: CompanyService) {
@@ -29,12 +34,22 @@ export class CreateeditComponent implements OnInit {
     this.employeeService.employeeToEditObs.subscribe(data => {
       this.rfid = data.rfid;
       this.companyId = data.companyId;
+      this.username = data.username;
+      this.role = data.role;
+      this.email = data.email;
+      this.password = data.password;
       this.userId = data.userId;
     });
 
     this.companyService.companyGetAllObs.subscribe((data) => {
       this.companies = data;
     });
+
+    this.roles = [
+      'Administrator',
+      'Manager',
+      'Chef'
+    ]
   }
 
   ngOnInit(): void {
@@ -44,19 +59,24 @@ export class CreateeditComponent implements OnInit {
 
   proceed(toSave: boolean) {
     if (toSave === true) {
-      var employee = new Employee();
+      var employee = new UserEmployee();
       employee.id = this.showCreateEditPopUpById;
       employee.rfid = this.rfid;
       employee.companyId = this.companyId;
+      employee.username = this.username;
+      employee.role = this.role;
+      employee.email = this.email;
       employee.userId = this.userId;
-
+      
       if (this.showCreateEditPopUpById == 0) {
+        employee.password = this.password;
         this.employeeService.create(employee).subscribe(data => {
           //this.successfulSave = true;
-          this.employeeService.getUsersUnemployeed();
+          this.employeeService.getByCompanyId(this.route.snapshot.queryParamMap.get('companyId'));
         });
       }
       else {
+        employee.password = "";
         this.employeeService.edit(employee).subscribe(data => {
           //this.successfulSave = true;
           this.employeeService.getByCompanyId(this.route.snapshot.queryParamMap.get('companyId'));

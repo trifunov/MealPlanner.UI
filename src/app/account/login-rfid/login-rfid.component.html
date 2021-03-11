@@ -1,11 +1,18 @@
-<input required class="form-control input-margin" placeholder="RFID" [(ngModel)]="rfid" />
 <div class="row">
-  <div class="col-6">
-    <button class="btn btn-primary" (click)="login()">НАЈАВА</button>
+  <div class="col-1">
+    <label>RFID</label>
   </div>
-  <div class="col-6 container-flex">
-    <a href="/account/login">Најава со лозинка</a>
+  <div class="col-11">
+    <input type="password" autofocus required class="form-control input-margin" (keydown.enter)="login()" [(ngModel)]="rfid" />
   </div>
-</div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <button class="btn btn-primary" (click)="login()">НАЈАВА</button>
+    </div>
+    <div class="col-6 container-flex">
+      <a href="/account/login">Најава со лозинка</a>
+    </div>
+  </div>
 
 

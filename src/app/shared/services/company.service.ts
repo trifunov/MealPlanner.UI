@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ConfigService } from '../services/config.service';
 import { BehaviorSubject } from 'rxjs';
 import { Company } from '../models/company';
+import { CompanyName } from '../models/company-name';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,9 @@ export class CompanyService {
   private companyGetAllSource = new BehaviorSubject<Company[]>([]);
   companyGetAllObs = this.companyGetAllSource.asObservable();
 
+  private companyNameSource = new BehaviorSubject<string>('');
+  companyNameObs = this.companyNameSource.asObservable();
+
   constructor(private http: HttpClient, private configService: ConfigService) {
     this.baseUrl = this.configService.getApiURI();
   }
@@ -35,6 +39,12 @@ export class CompanyService {
     this.http.get<Company>(this.baseUrl + "/company/getbyid?id=" + id).subscribe(data => {
       this.companyToEditSource.next(data);
       this.showCreateEditPopUpById.next(id);
+    });
+  }
+
+  getName(id: string) {
+    this.http.get<CompanyName>(this.baseUrl + "/company/getname?id=" + id).subscribe(data => {
+      this.companyNameSource.next(data.name);
     });
   }
 

@@ -14,7 +14,7 @@ export class AccountService {
 
   baseUrl: string = '';
 
-  private loggedInSource = new BehaviorSubject<LoggedInUser>({ isLoggedIn: false, email: '', username: '' });
+  private loggedInSource = new BehaviorSubject<LoggedInUser>({ isLoggedIn: false, email: '', username: '', role: '' });
   loggedInObs = this.loggedInSource.asObservable();
 
   constructor(private http: HttpClient, private configService: ConfigService, private router: Router) {
@@ -42,7 +42,7 @@ export class AccountService {
       };
       localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
       this.loggedInSource.next(loggedInUser);
-      this.router.navigateByUrl('company/list');
+      this.router.navigateByUrl('order/create');
     });
   }
 

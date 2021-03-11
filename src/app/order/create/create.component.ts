@@ -26,6 +26,10 @@ export class CreateOrderComponent implements OnInit {
     this.mealService.mealGetValidObs.subscribe((data) => {
       this.meals = data;
     });
+
+    this.orderService.selectedPlanObs.subscribe((data) => {
+      this.selectedPlan = data;
+    });
   }
 
   ngOnInit(): void {

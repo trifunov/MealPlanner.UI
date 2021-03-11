@@ -28,9 +28,13 @@
   animation-duration: 0.4s
 }
 
-/* Add Animation */
-@-webkit-keyframes animatetop {
-  from {
+  .modal-content label {
+      color:#888;
+  }
+
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+    from {
     top: -300px;
     opacity: 0
   }

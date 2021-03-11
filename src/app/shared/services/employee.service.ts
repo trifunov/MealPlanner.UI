@@ -13,7 +13,7 @@ export class EmployeeService {
   baseUrl: string = '';
   public showCreateEditPopUpById = new BehaviorSubject(-1);
 
-  private employeeToEditSource = new BehaviorSubject<UserEmployee>({ id: -1, companyId: 0, companyName: '', rfid: '', userId: '', username: '' });
+  private employeeToEditSource = new BehaviorSubject<UserEmployee>({ id: -1, companyId: 0, companyName: '', rfid: '', username: '', email: '', password: '', role: '', userId: '' });
   employeeToEditObs = this.employeeToEditSource.asObservable();
 
   private employeesSource = new BehaviorSubject<UserEmployee[]>([]);
@@ -42,21 +42,28 @@ export class EmployeeService {
     });
   }
 
-  setEmployeeForCreate(userId: string) {
+  setEmployeeForCreate(companyId: number) {
     var employee = new UserEmployee();
     employee.rfid = '';
-    employee.companyId = 0;
-    employee.userId = userId;
+    employee.companyId = companyId;
+    employee.role = "";
+    employee.email = "";
+    employee.password = "";
+    employee.userId = "";
 
     this.employeeToEditSource.next(employee);
     this.showCreateEditPopUpById.next(0);
   }
 
-  create(employee: Employee) {
+  create(employee: UserEmployee) {
     return this.http.post(this.baseUrl + "/employee/add", employee);
   }
 
-  edit(employee: Employee) {
+  edit(employee: UserEmployee) {
     return this.http.post(this.baseUrl + "/employee/update", employee);
+  }
+
+  delete(id: number, userId: string) {
+    return this.http.get(this.baseUrl + "/employee/delete?id=" + id + "&userId=" + userId);
   }
 }

@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CommonName } from '../models/common-name';
 import { Meal } from '../models/meal';
 import { ConfigService } from './config.service';
+import { OrderService } from './order.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class MealService {
   private allergenGetAllSource = new BehaviorSubject<CommonName[]>([]);
   allergenGetAllObs = this.allergenGetAllSource.asObservable();
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
+  constructor(private http: HttpClient, private configService: ConfigService, private orderService: OrderService) {
     this.baseUrl = this.configService.getApiURI();
   }
 
@@ -43,6 +44,7 @@ export class MealService {
   getValid(shift: number, date: string) {
     return this.http.get<Meal[]>(this.baseUrl + "/meal/getvalid?shift=" + shift + "&date=" + date).subscribe(data => {
       this.mealGetValidSource.next(data);
+      this.orderService.getByDateAndShift(shift,date);
     });
   }
 
