@@ -8,6 +8,8 @@ import { ListComponent } from './company/list/list.component';
 import { ListEmployeeComponent } from './employee/list/list.component';
 import { ListMealComponent } from './meal/list/list.component';
 import { CreateOrderComponent } from './order/create/create.component';
+import { DeliveryComponent } from './order/delivery/delivery.component';
+import { ListOrderComponent } from './order/list/list.component';
 import { CreateeditPlanComponent } from './plan/createedit/createedit.component';
 import { ListPlanComponent } from './plan/list/list.component';
 
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'meal/list', component: ListMealComponent },
   { path: 'plan/list', component: ListPlanComponent },
   { path: 'plan/createedit', component: CreateeditPlanComponent },
-  { path: 'order/create', component: CreateOrderComponent }
+  { path: 'order/create', component: CreateOrderComponent },
+  { path: 'order/list', component: ListOrderComponent },
+  { path: 'order/delivery', component: DeliveryComponent }
 ];
 
 @NgModule({

@@ -48,6 +48,10 @@ export class MealService {
     });
   }
 
+  setValidEmpty() {
+    this.mealGetValidSource.next([]);
+  }
+
   getAllIngredients() {
     return this.http.get<Meal[]>(this.baseUrl + "/ingredient/getall").subscribe(data => {
       this.ingredientGetAllSource.next(data);

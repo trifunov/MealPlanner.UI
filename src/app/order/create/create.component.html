@@ -1,31 +1,4 @@
-<div class="row input-margin">
-  <div class="remove-padding">
-    <button class="btn btn-primary button-smaller-padding" (click)="changeDates(-(elementsToShow+1))">
-      <i class="fa fa-arrow-left" aria-hidden="true"></i>
-    </button>
-  </div>
-  <ng-container *ngFor="let item of dates; let i = index;">
-    <div *ngIf="item.hidden !== true" class="col-lg-2 col-md-2 col-5 col-sm-5 remove-padding button-smaller-padding">
-      <button class="btn" [ngClass]="{'btn-default': selectedDate !== item.value, 'btn-primary': selectedDate === item.value }" (click)="selectDate(item)">
-        {{item.label}}
-      </button>
-    </div>
-  </ng-container>
-  <div class="remove-padding">
-    <button class="btn btn-primary button-smaller-padding" (click)="changeDates(elementsToShow+1)">
-      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-    </button>
-  </div>
-</div>
-<div class="row input-margin container-flex">
-  <ng-container *ngFor="let item of shifts; let i = index;">
-    <div class="col-lg-2 col-12 remove-padding button-smaller-padding">
-      <button class="btn" [ngClass]="{'btn-default': selectedShift !== item.id, 'btn-primary': selectedShift === item.id }" (click)="selectShift(item)">
-        {{item.name}}
-      </button>
-    </div>
-  </ng-container>
-</div>
+<app-date-shift-select (selectedDateShift)="changedDateShiftSelection($event)"></app-date-shift-select>
 <div class="row input-margin container-flex">
   <ng-container *ngFor="let item of meals; let i = index;">
     <div class="card col-lg-4 col-md-4 col-sm-12 col-12 cursor-pointer" (click)="createOrder(item.planId)" [ngClass]="{'selected-meal': selectedPlan === item.planId }">

@@ -1,0 +1,33 @@
+<app-date-shift-select (selectedDateShift)="changedDateShiftSelection($event)"></app-date-shift-select>
+<div class="input-margin container-flex">
+  <div class="col-lg-6 col-md-8 col-sm-12 col-12">
+    <div class="row">
+      <div class="col-1">
+        <label>RFID</label>
+      </div>
+      <div class="col-11">
+        <input #rfidField type="password" autofocus required class="form-control input-margin" (keydown.enter)="getOrderByRfid()" [(ngModel)]="rfid" />
+      </div>
+    </div>
+    </div>
+  </div>
+  <div *ngIf="currentOrder != null" class="row input-margin container-flex">
+    <div class="card col-lg-6 col-md-8 col-sm-12 col-12">
+      <img class="card-img-top" style="height: 260px;" src="{{currentOrder.imageBase64}}" alt="Card image cap">
+      <div class="card-body">
+        <div class="row remove-padding">
+          <div class="col-6 button-smaller-padding" style="text-align:left;">
+            <h5 class="card-title">{{ currentOrder.name }}</h5>
+          </div>
+          <div class="col-6 button-smaller-padding" style="text-align:right;">
+            <h5 class="card-title">{{ currentOrder.nameForeign }}</h5>
+          </div>
+        </div>
+        <div class="row remove-padding">
+          <div class="col-12 button-smaller-padding">
+            <button class="btn btn-success" style="width:100%" (click)="deliveredOrder(currentOrder.orderId)">ПОДИГНАТА</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
