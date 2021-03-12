@@ -3,14 +3,11 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\account",
-    "\\src\\app\\account\\login-rfid",
-    "\\src\\app\\account\\register",
-    "\\src\\app\\header",
-    "\\src\\app\\header\\header",
+    "\\src\\app\\order",
+    "\\src\\app\\order\\delivery",
     "\\src\\app\\shared",
     "\\src\\app\\shared\\services"
   ],
-  "SelectedNode": "\\src\\app\\account\\login-rfid\\login-rfid.component.html",
+  "SelectedNode": "\\src\\app\\order\\delivery\\delivery.component.html",
   "PreviewInSolutionExplorer": false
 }

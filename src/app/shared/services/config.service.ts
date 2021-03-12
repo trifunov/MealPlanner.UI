@@ -6,7 +6,7 @@ export class ConfigService {
   _apiURI: string;
 
   constructor() {
-    this._apiURI = 'http://mealplannerapi.azurewebsites.net/api';
+    this._apiURI = 'https://localhost:44316/api';
   }
 
   getApiURI() {

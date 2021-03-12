@@ -16,7 +16,7 @@ export class CompanyService {
   public showDeletePopUpById = new BehaviorSubject(0);
   public showCreateEditPopUpById = new BehaviorSubject(-1);
 
-  private companyToEditSource = new BehaviorSubject<Company>({ id: -1, name: '' });
+  private companyToEditSource = new BehaviorSubject<Company>({ id: -1, name: '', imageBase64: '' });
   companyToEditObs = this.companyToEditSource.asObservable();
 
   private companyGetAllSource = new BehaviorSubject<Company[]>([]);
@@ -24,6 +24,9 @@ export class CompanyService {
 
   private companyNameSource = new BehaviorSubject<string>('');
   companyNameObs = this.companyNameSource.asObservable();
+
+  private companyLogoSource = new BehaviorSubject<string>('');
+  companyLogoObs = this.companyLogoSource.asObservable();
 
   constructor(private http: HttpClient, private configService: ConfigService) {
     this.baseUrl = this.configService.getApiURI();
@@ -45,6 +48,12 @@ export class CompanyService {
   getName(id: string) {
     this.http.get<CompanyName>(this.baseUrl + "/company/getname?id=" + id).subscribe(data => {
       this.companyNameSource.next(data.name);
+    });
+  }
+
+  getLogo() {
+    this.http.get<CompanyName>(this.baseUrl + "/company/getlogo").subscribe(data => {
+      this.companyLogoSource.next(data.imageBase64);
     });
   }
 

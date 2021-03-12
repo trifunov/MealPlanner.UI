@@ -5,6 +5,7 @@ import { ConfigService } from '../services/config.service';
 import { BehaviorSubject } from 'rxjs';
 import { LoggedInUser } from '../models/loggedinuser';
 import { Router } from '@angular/router';
+import { CompanyService } from './company.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AccountService {
   private loggedInSource = new BehaviorSubject<LoggedInUser>({ isLoggedIn: false, email: '', username: '', role: '' });
   loggedInObs = this.loggedInSource.asObservable();
 
-  constructor(private http: HttpClient, private configService: ConfigService, private router: Router) {
+  constructor(private http: HttpClient, private configService: ConfigService, private companyService: CompanyService, private router: Router) {
     if (localStorage.getItem('loggedInUser')) {
       this.loggedInSource.next(JSON.parse(localStorage.getItem('loggedInUser')));
     }
@@ -33,32 +34,28 @@ export class AccountService {
 
   login(username, password) {
     this.http.post<any>(this.baseUrl + "/account/login", { username: username, password: password }).subscribe(data => {
-      localStorage.setItem('token', data.token);
-      var loggedInUser = {
-        isLoggedIn: true,
-        email: '',
-        username: data.username,
-        role: data.role
-      };
-      localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-      this.loggedInSource.next(loggedInUser);
-      this.router.navigateByUrl('order/create');
+      this.afterLogin(data);
     });
   }
 
   loginRfid(rfid) {
     this.http.post<any>(this.baseUrl + "/account/loginrfid", { rfid: rfid }).subscribe(data => {
-      localStorage.setItem('token', data.token);
-      var loggedInUser = {
-        isLoggedIn: true,
-        email: '',
-        username: data.username,
-        role: data.role
-      };
-      localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
-      this.loggedInSource.next(loggedInUser);
-      this.router.navigateByUrl('order/create');
+      this.afterLogin(data);
     });
+  }
+
+  afterLogin(data) {
+    localStorage.setItem('token', data.token);
+    var loggedInUser = {
+      isLoggedIn: true,
+      email: '',
+      username: data.username,
+      role: data.role
+    };
+    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+    this.loggedInSource.next(loggedInUser);
+    this.companyService.getLogo();
+    this.router.navigateByUrl('order/create');
   }
 
   logout() {

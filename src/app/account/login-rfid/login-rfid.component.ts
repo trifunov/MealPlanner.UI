@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from '../../shared/services/account.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { AccountService } from '../../shared/services/account.service';
 export class LoginRfidComponent implements OnInit {
 
   rfid: string = "";
+  @ViewChild("rfidField") rfidField: ElementRef;
 
   constructor(private accountService: AccountService) { }
 
@@ -17,5 +18,7 @@ export class LoginRfidComponent implements OnInit {
 
   login(): void {
     this.accountService.loginRfid(this.rfid);
+    this.rfid = '';
+    this.rfidField.nativeElement.focus();
   }
 }

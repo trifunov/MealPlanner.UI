@@ -3,7 +3,7 @@
     <label>RFID</label>
   </div>
   <div class="col-11">
-    <input type="password" autofocus required class="form-control input-margin" (keydown.enter)="login()" [(ngModel)]="rfid" />
+    <input type="password" #rfidField autofocus required class="form-control input-margin" (keydown.enter)="login()" [(ngModel)]="rfid" />
   </div>
   </div>
   <div class="row">
