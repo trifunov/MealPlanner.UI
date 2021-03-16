@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-12 col-md-6">
+    <div class="row">
+      <div class="col-1">
+        <button class="btn btn-primary" (click)="getReports()">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <div class="col-1">
+        <label>Компанија</label>
+      </div>
+      <div class="col-10">
+        <select class="form-control input-margin" [(ngModel)]="companyId">
+          <ng-container *ngFor="let item of companies">
+            <option value="{{ item.id }}">
+              {{ item.name }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3">
+    <div class="row">
+      <div class="col-1">
+        <label>Од</label>
+      </div>
+      <div class="col-11">
+        <dp-date-picker theme="dp-material"
+                        class="input-margin"
+                        [config]="datePickerConfig"
+                        [(ngModel)]="fromDate"
+                        placeholder="Од">
+        </dp-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3">
+    <div class="row">
+      <div class="col-1">
+        <label>До</label>
+      </div>
+      <div class="col-11">
+        <dp-date-picker theme="dp-material"
+                        class="input-margin"
+                        [config]="datePickerConfig"
+                        [(ngModel)]="toDate"
+                        placeholder="До">
+        </dp-date-picker>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-12">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Датум</th>
+        <th>Смена</th>
+        <th>Оброк</th>
+        <th>Вкупно нарачки</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of plans">
+        <td>{{ convertDateToMomentString(item.date) }}</td>
+        <td>{{ item.shift }}</td>
+        <td>{{ item.mealName }}</td>
+        <td>{{ item.totalOrders }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

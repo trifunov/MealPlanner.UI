@@ -12,6 +12,7 @@ import { DeliveryComponent } from './order/delivery/delivery.component';
 import { ListOrderComponent } from './order/list/list.component';
 import { CreateeditPlanComponent } from './plan/createedit/createedit.component';
 import { ListPlanComponent } from './plan/list/list.component';
+import { ReportPlanComponent } from './plan/report/report.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'meal/list', component: ListMealComponent },
   { path: 'plan/list', component: ListPlanComponent },
   { path: 'plan/createedit', component: CreateeditPlanComponent },
+  { path: 'plan/report', component: ReportPlanComponent },
   { path: 'order/create', component: CreateOrderComponent },
   { path: 'order/list', component: ListOrderComponent },
   { path: 'order/delivery', component: DeliveryComponent }

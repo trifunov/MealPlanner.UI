@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
 import { Plan } from '../models/plan';
+import { PlanReportRequest } from '../models/plan-report-request';
+import { PlanReportResponse } from '../models/plan-report-response';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -30,6 +32,9 @@ export class PlanService {
   private planGetByCompanyIdSource = new BehaviorSubject<Plan[]>([]);
   planGetByCompanyIdObs = this.planGetByCompanyIdSource.asObservable();
 
+  private planGetReportsSource = new BehaviorSubject<PlanReportResponse[]>([]);
+  planGetReportsObs = this.planGetReportsSource.asObservable();
+
   constructor(private http: HttpClient, private configService: ConfigService) {
     this.baseUrl = this.configService.getApiURI();
   }
@@ -37,6 +42,12 @@ export class PlanService {
   getByCompanyId() {
     return this.http.get<Plan[]>(this.baseUrl + "/plan/getbycompanyid").subscribe(data => {
       this.planGetByCompanyIdSource.next(data);
+    });
+  }
+
+  getReports(request: PlanReportRequest) {
+    return this.http.post<PlanReportResponse[]>(this.baseUrl + "/plan/getreports", request).subscribe(data => {
+      this.planGetReportsSource.next(data);
     });
   }
 
@@ -52,5 +63,9 @@ export class PlanService {
 
   delete(ids: number[]) {
     return this.http.post(this.baseUrl + "/plan/delete", ids);
+  }
+
+  convertDateToMomentString(date: Date) {
+    return moment(date).format('YYYY-MM-DD');
   }
 }

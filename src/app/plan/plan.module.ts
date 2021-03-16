@@ -8,10 +8,11 @@ import { PlanService } from '../shared/services/plan.service';
 import { CreateeditPlanComponent } from './createedit/createedit.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { DeleteComponent } from './delete/delete.component';
+import { ReportPlanComponent } from './report/report.component';
 
 
 @NgModule({
-  declarations: [ListPlanComponent, CreateeditPlanComponent, DeleteComponent],
+  declarations: [ListPlanComponent, CreateeditPlanComponent, DeleteComponent, ReportPlanComponent],
   imports: [
     CommonModule,
     FormsModule,

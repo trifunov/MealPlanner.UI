@@ -36,6 +36,6 @@ export class ListPlanComponent implements OnInit {
   }
 
   convertDateToMomentString(date: Date) {
-    return moment(date).format('YYYY-MM-DD');
+    return this.planService.convertDateToMomentString(date);
   }
 }
