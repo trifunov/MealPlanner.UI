@@ -33,8 +33,8 @@
           <div class="col-10">
             <select class="form-control input-margin" [(ngModel)]="role">
               <ng-container *ngFor="let item of roles">
-                <option value="{{ item }}">
-                  {{ item }}
+                <option *ngIf="item.id != 'Administrator'" value="{{ item.id }}">
+                  {{ item.name }}
                 </option>
               </ng-container>
             </select>

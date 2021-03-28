@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Employee } from '../models/employee';
+import { Order } from '../models/order';
 import { UserEmployee } from '../models/useremployee';
 import { ConfigService } from './config.service';
 
@@ -19,6 +20,9 @@ export class EmployeeService {
   private employeesSource = new BehaviorSubject<UserEmployee[]>([]);
   employeesObs = this.employeesSource.asObservable();
 
+  private employeesFromTokenSource = new BehaviorSubject<UserEmployee[]>([]);
+  employeesFromTokenObs = this.employeesFromTokenSource.asObservable();
+
   constructor(private http: HttpClient, private configService: ConfigService) {
     this.baseUrl = this.configService.getApiURI();
   }
@@ -32,6 +36,12 @@ export class EmployeeService {
   getByCompanyId(companyId: string) {
     return this.http.get<UserEmployee[]>(this.baseUrl + "/employee/GetByCompanyId?companyId=" + companyId).subscribe(data => {
       this.employeesSource.next(data);
+    });
+  }
+
+  getByCompanyIdFromToken() {
+    return this.http.get<UserEmployee[]>(this.baseUrl + "/employee/GetByCompanyIdFromToken").subscribe(data => {
+      this.employeesFromTokenSource.next(data);
     });
   }
 

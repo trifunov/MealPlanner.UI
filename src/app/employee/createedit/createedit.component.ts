@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Company } from '../../shared/models/company';
 import { Employee } from '../../shared/models/employee';
+import { LoggedInUser } from '../../shared/models/loggedinuser';
 import { UserEmployee } from '../../shared/models/useremployee';
+import { AccountService } from '../../shared/services/account.service';
 import { CompanyService } from '../../shared/services/company.service';
+import { ConfigService } from '../../shared/services/config.service';
 import { EmployeeService } from '../../shared/services/employee.service';
 
 @Component({
@@ -25,8 +28,9 @@ export class CreateeditComponent implements OnInit {
   email: string = "";
   password: string = "";
   userId: string = "";
+  loggedInUser: LoggedInUser;
 
-  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private companyService: CompanyService) {
+  constructor(private employeeService: EmployeeService, private route: ActivatedRoute, private companyService: CompanyService, private configService: ConfigService, private accountService: AccountService) {
     this.employeeService.showCreateEditPopUpById.subscribe(data => {
       this.showCreateEditPopUpById = data;
     });
@@ -45,11 +49,8 @@ export class CreateeditComponent implements OnInit {
       this.companies = data;
     });
 
-    this.roles = [
-      'Administrator',
-      'Manager',
-      'Chef'
-    ]
+    this.roles = this.configService.getRoles();
+    this.accountService.loggedInObs.subscribe(data => this.loggedInUser = data);
   }
 
   ngOnInit(): void {

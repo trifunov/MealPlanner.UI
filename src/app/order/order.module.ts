@@ -6,14 +6,21 @@ import { OrderService } from '../shared/services/order.service';
 import { DeliveryComponent } from './delivery/delivery.component';
 import { ListOrderComponent } from './list/list.component';
 import { DateShiftSelectComponent } from './date-shift-select/date-shift-select.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import { DpDatePickerModule } from 'ng2-date-picker';
+import { OrderCreateEditFromListComponent } from './create-edit-from-list/create-edit-from-list.component';
 
 
 
 @NgModule({
-  declarations: [CreateOrderComponent, DeliveryComponent, ListOrderComponent, DateShiftSelectComponent],
+  declarations: [CreateOrderComponent, DeliveryComponent, ListOrderComponent, DateShiftSelectComponent, OrderCreateEditFromListComponent],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule,
+    NgOptionHighlightModule,
+    DpDatePickerModule 
   ],
   providers: [OrderService],
   bootstrap: [CreateOrderComponent]

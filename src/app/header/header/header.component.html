@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-light navbar-light">
   <a class="navbar-brand" href="/order/create">
-    <img src="{{ companyLogo }}" class="brand-image" />
+    <img *ngIf="companyLogo !== ''" src="{{ companyLogo }}" class="brand-image" />
     <span *ngIf="companyLogo == ''">ДОМ</span>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -9,24 +9,24 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
 
     <ul *ngIf="loggedInUser.isLoggedIn == true" class="navbar-nav mr-auto">
-      <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator'">
+      <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator' || loggedInUser.role == 'HR'">
         <a class="nav-link" href="/company/list">Компанија</a>
       </li>
       <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator'">
         <a class="nav-link" href="/meal/list">Оброк</a>
       </li>
-      <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator' || loggedInUser.role == 'Manager'">
+      <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator' || loggedInUser.role == 'Manager'  || loggedInUser.role == 'HR'">
         <a class="nav-link" href="/plan/list">План</a>
       </li>
-      <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator'">
+      <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator' || loggedInUser.role == 'HR'">
         <a class="nav-link" href="/plan/report">Извештај</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="loggedInUser.role != 'Chef'">
         <a class="nav-link" href="/order/create">Нарачка</a>
       </li>
-      <!--<li class="nav-item">
-    <a class="nav-link" href="/order/list">Преглед на нарачки</a>
-  </li>-->
+      <li class="nav-item">
+        <a class="nav-link" href="/order/list">Преглед на нарачки</a>
+      </li>
       <li class="nav-item" *ngIf="loggedInUser.role == 'Chef'">
         <a class="nav-link" href="/order/delivery">Подигнување нарачки</a>
       </li>

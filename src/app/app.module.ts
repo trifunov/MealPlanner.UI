@@ -14,13 +14,15 @@ import { EmployeeModule } from './employee/employee.module';
 import { MealModule } from './meal/meal.module';
 import { PlanModule } from './plan/plan.module';
 import { OrderModule } from './order/order.module';
+import { NotifierComponent } from './notifier/notifier/notifier.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoaderComponent
+    LoaderComponent,
+    NotifierComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,6 @@ export class DateShiftSelectComponent implements OnInit {
   dates = [];
   shifts = [];
   elementsToShow: number = 4;
-  dateFormatPresentation: string = 'dddd DD MMM YY';
   selectedDate: string;
   selectedShift: number;
   @Output() selectedDateShift = new EventEmitter<DateShift>();
@@ -25,7 +24,6 @@ export class DateShiftSelectComponent implements OnInit {
     if (window.screen) {
       if (screen.width < 768) {
         this.elementsToShow = 1;
-        this.dateFormatPresentation = 'ddd DD MMM YY';
       }
     }
 
@@ -35,8 +33,8 @@ export class DateShiftSelectComponent implements OnInit {
         hiddenValue = true;
       }
       this.dates.push({
-        value: moment().add(i, 'days').format('YYYY-MM-DD'),
-        label: moment().add(i, 'days').format(this.dateFormatPresentation),
+        value: moment().locale('mk').add(i, 'days').format('YYYY-MM-DD'),
+        label: moment().locale('mk').add(i, 'days').format('ddd DD MMM YY'),
         hidden: hiddenValue
       });
     }

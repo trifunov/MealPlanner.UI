@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MealService } from '../shared/services/meal.service';
 import { DeleteComponent } from './delete/delete.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
   imports: [
     CommonModule,
     FormsModule,
-    NgSelectModule 
+    NgSelectModule,
+    NgOptionHighlightModule 
   ],
   providers: [MealService],
   bootstrap: [ListMealComponent]

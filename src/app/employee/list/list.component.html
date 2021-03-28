@@ -15,10 +15,10 @@
     <tr *ngFor="let item of employees">
       <td>{{ item.username }}</td>
       <td>{{ item.rfid }}</td>
-      <td>{{ item.role }}</td>
+      <td>{{ convertRoleIdToName(item.role) }}</td>
       <td>
         <div class="row remove-margin">
-          <button class="btn btn-warning button-icon-padding table-button-margin" (click)="createEdit(item.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <button *ngIf="item.role != 'Administrator'" class="btn btn-warning button-icon-padding table-button-margin" (click)="createEdit(item.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
           <!--<button class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.id, item.userId)"><i class="fa fa-times" aria-hidden="true"></i></button>-->
         </div>
       </td>

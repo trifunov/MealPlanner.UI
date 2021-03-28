@@ -4,6 +4,7 @@ import { Meal } from '../../shared/models/meal';
 import { Order } from '../../shared/models/order';
 import { ConfigService } from '../../shared/services/config.service';
 import { MealService } from '../../shared/services/meal.service';
+import { NotifierService } from '../../shared/services/notifier.service';
 import { OrderService } from '../../shared/services/order.service';
 
 @Component({
@@ -16,8 +17,8 @@ export class CreateOrderComponent implements OnInit {
   meals: Meal[];
   selectedShift: number = -1;
   selectedPlan: number = -1;
-  
-  constructor(private mealService: MealService, private orderService: OrderService, private configService: ConfigService) {
+
+  constructor(private mealService: MealService, private orderService: OrderService, private configService: ConfigService, private notifierService: NotifierService) {
     this.mealService.mealGetValidObs.subscribe((data) => {
       this.meals = data;
     });
@@ -49,6 +50,9 @@ export class CreateOrderComponent implements OnInit {
 
     this.orderService.create(order).subscribe(data => {
       this.selectedPlan = planId;
+      if (data['message'] !== '') {
+        this.notifierService.notificationConfig.next({ type: 'success', message: data['message'].toString() });
+      }
     });
   }
 }

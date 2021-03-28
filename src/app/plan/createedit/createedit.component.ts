@@ -15,20 +15,16 @@ import { PlanService } from '../../shared/services/plan.service';
 export class CreateeditPlanComponent implements OnInit {
 
   ids: string;
-  meals: Meal[];
   date: string;
   editableFrom: string;
   editableTo: string;
+  meals: Meal[];
   mealIds: number[];
   shifts: number[];
   initShifts;
   datePickerConfig;
 
-  constructor(private activatedRoute: ActivatedRoute, private route: Router, private planService: PlanService, private mealService: MealService, private configService: ConfigService) {
-    this.mealService.mealGetAllObs.subscribe((data) => {
-      this.meals = data;
-    });
-
+  constructor(private activatedRoute: ActivatedRoute, private route: Router, private planService: PlanService, private configService: ConfigService, private mealService: MealService) {
     this.planService.planToEditObs.subscribe((data) => {
       this.date = moment(data.date).format('YYYY-MM-DD');
       this.editableFrom = moment(data.editableFrom).format('YYYY-MM-DD');
@@ -38,6 +34,10 @@ export class CreateeditPlanComponent implements OnInit {
     });
 
     this.initShifts = this.configService.getShifts();
+
+    this.mealService.mealGetAllObs.subscribe((data) => {
+      this.meals = data;
+    });
 
     this.datePickerConfig = {
       format: 'YYYY-MM-DD'
@@ -54,6 +54,10 @@ export class CreateeditPlanComponent implements OnInit {
     else {
       this.planService.getByIds(this.ids.split(',').map(Number));
     }
+  }
+
+  changedMealSelection(selectedMeals: number[]) {
+    this.mealIds = selectedMeals;
   }
 
   prepareForCreatePlan() {

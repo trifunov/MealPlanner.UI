@@ -32,5 +32,4 @@ export class ListComponent implements OnInit {
   delete(id: number) {
     this.companyService.showDeletePopUpById.next(id);
   }
-
 }

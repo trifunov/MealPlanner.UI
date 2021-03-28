@@ -18,7 +18,7 @@ import { ReportPlanComponent } from './report/report.component';
     FormsModule,
     NgSelectModule,
     NgOptionHighlightModule,
-    DpDatePickerModule 
+    DpDatePickerModule
   ],
   providers: [PlanService],
   bootstrap: [ListPlanComponent]

@@ -2,10 +2,12 @@
 <div class="row input-margin container-flex">
   <ng-container *ngFor="let item of meals; let i = index;">
     <div class="card col-lg-4 col-md-4 col-sm-12 col-12 cursor-pointer" (click)="createOrder(item.planId)" [ngClass]="{'selected-meal': selectedPlan === item.planId }">
-      <div *ngIf="selectedPlan === item.planId" class="selected-meal-icon">
-        <button class="btn btn-success disabled rounded-circle remove-padding"><i class="fa fa-check" aria-hidden="true"></i></button>
+      <div style="position:relative;">
+        <img class="card-img-top" style="height: 260px;" src="{{item.imageBase64}}" alt="Card image cap" />
+        <div *ngIf="selectedPlan === item.planId" class="selected-meal-icon">
+          <button disabled class="btn btn-success rounded-circle remove-padding"><i class="fa fa-check fa-lg" aria-hidden="true"></i></button>
+        </div>
       </div>
-      <img class="card-img-top" style="height: 260px;" src="{{item.imageBase64}}" alt="Card image cap">
       <div class="card-body">
         <div class="row remove-padding">
           <div class="col-6 button-smaller-padding" style="text-align:left;">

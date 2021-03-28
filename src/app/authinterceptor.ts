@@ -12,11 +12,12 @@ import { catchError, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AccountService } from './shared/services/account.service';
 import { LoaderService } from './shared/services/loader.service';
+import { NotifierService } from './shared/services/notifier.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router, private accountService: AccountService, private loaderService: LoaderService) { }
+  constructor(private router: Router, private accountService: AccountService, private loaderService: LoaderService, private notifierService: NotifierService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loaderService.isLoading.next(true);
@@ -37,6 +38,9 @@ export class AuthInterceptor implements HttpInterceptor {
               break;
             case 403:     //forbidden
               this.router.navigateByUrl("account/unauthorized");
+              break;
+            case 400:
+              this.notifierService.notificationConfig.next({ type: 'error', message: error.error });
               break;
           }
 

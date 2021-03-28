@@ -2,8 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app"
+    "\\src\\app",
+    "\\src\\app\\company",
+    "\\src\\app\\company\\list",
+    "\\src\\app\\order",
+    "\\src\\app\\order\\list",
+    "\\src\\app\\plan",
+    "\\src\\app\\plan\\report",
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\services"
   ],
-  "SelectedNode": "\\src\\app\\authinterceptor.ts",
+  "SelectedNode": "\\src\\app\\shared\\services\\employee.service.ts",
   "PreviewInSolutionExplorer": false
 }

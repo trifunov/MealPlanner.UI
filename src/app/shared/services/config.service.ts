@@ -41,4 +41,35 @@ export class ConfigService {
         name: 'Администрација'
       }];
   }
+
+  getRoles() {
+    return [{
+      id: '',
+      name: ''
+    }, {
+      id: 'Administrator',
+      name: 'Администратор'
+    }, {
+      id: 'HR',
+      name: 'HR'
+    }, {
+      id: 'Manager',
+      name: 'Менаџер'
+    }, {
+      id: 'Chef',
+      name: 'Кантина'
+    }];
+  }
+
+  convertRoleIdToName(roleId) {
+    var roles = this.getRoles();
+
+    for (var i = 0; i < roles.length; i++) {
+      if (roles[i].id == roleId) {
+        return roles[i].name;
+      }
+    }
+
+    return '';
+  }
 }

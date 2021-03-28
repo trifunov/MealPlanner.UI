@@ -73,12 +73,7 @@
                    bindLabel="name"
                    bindValue="id">
           <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-            <div style="margin: 10px 0;" class="card">
-              <div class="card-body">
-                <h5 class="card-title" [ngOptionHighlight]="search">{{item.name}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{item.nameForeign}}</h6>
-              </div>
-            </div>
+            <label [ngOptionHighlight]="search">{{item.name}}</label>
           </ng-template>
         </ng-select>
       </div>

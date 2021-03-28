@@ -68,4 +68,8 @@ export class PlanService {
   convertDateToMomentString(date: Date) {
     return moment(date).format('YYYY-MM-DD');
   }
+
+  convertDateStringToMomentString(date: string) {
+    return moment(date).format('YYYY-MM-DD');
+  }
 }

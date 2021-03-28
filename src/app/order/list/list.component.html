@@ -1,1 +1,92 @@
-<p>list works!</p>
+<div class="row input-margin">
+  <div class="col-12 col-md-6">
+    <div class="row">
+      <div class="col-1">
+        <button class="btn btn-primary" (click)="getFiltered()">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <div class="col-1">
+        <button class="btn btn-primary" (click)="create()">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+      <ng-container *ngIf="loggedInUser.role == 'HR'">
+        <div class="col-1">
+          <label>Вработени</label>
+        </div>
+        <div class="col-9">
+          <ng-select [items]="employees"
+                     [multiple]="true"
+                     [(ngModel)]="employeeIds"
+                     bindLabel="username"
+                     bindValue="id">
+            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+              <label [ngOptionHighlight]="search">{{item.username}}</label>
+            </ng-template>
+          </ng-select>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="col-12 col-md-3">
+    <div class="row">
+      <div class="col-1">
+        <label>Од</label>
+      </div>
+      <div class="col-11">
+        <dp-date-picker theme="dp-material"
+                        class="input-margin"
+                        [config]="datePickerConfig"
+                        [(ngModel)]="fromDate"
+                        placeholder="Од">
+        </dp-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3">
+    <div class="row">
+      <div class="col-1">
+        <label>До</label>
+      </div>
+      <div class="col-11">
+        <dp-date-picker theme="dp-material"
+                        class="input-margin"
+                        [config]="datePickerConfig"
+                        [(ngModel)]="toDate"
+                        placeholder="До">
+        </dp-date-picker>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-12">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Датум</th>
+        <th>Смена</th>
+        <th>Вработен</th>
+        <th>Оброк</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of orders">
+        <td>{{ convertDateToMomentString(item.date) }}</td>
+        <td>{{ item.shift }}</td>
+        <td>{{ item.employee }}</td>
+        <td>{{ item.meal }}</td>
+        <td>
+          <div class="row remove-margin">
+            <ng-container *ngIf="item.isDelivered == false">
+              <button class="btn btn-warning button-icon-padding table-button-margin" (click)="edit(item.orderId)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+              <button class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.orderId)"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </ng-container>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-order-create-edit-from-list></app-order-create-edit-from-list>

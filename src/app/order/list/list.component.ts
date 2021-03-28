@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { LoggedInUser } from '../../shared/models/loggedinuser';
+import { OrderFilteredRequest } from '../../shared/models/order-filtered-request';
+import { OrderFilteredResponse } from '../../shared/models/order-filtered-response';
+import { UserEmployee } from '../../shared/models/useremployee';
+import { AccountService } from '../../shared/services/account.service';
+import { EmployeeService } from '../../shared/services/employee.service';
+import { OrderService } from '../../shared/services/order.service';
+import { PlanService } from '../../shared/services/plan.service';
 
 @Component({
   selector: 'app-order-list',
@@ -7,9 +15,63 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListOrderComponent implements OnInit {
 
-  constructor() { }
+  datePickerConfig;
+  employees: UserEmployee[];
+  orders: OrderFilteredResponse[];
+  employeeIds: number[];
+  fromDate: string;
+  toDate: string;
+  loggedInUser: LoggedInUser;
 
-  ngOnInit(): void {
+  constructor(private employeeService: EmployeeService, private orderService: OrderService, private accountService: AccountService, private planService: PlanService) {
+    this.accountService.loggedInObs.subscribe(data => this.loggedInUser = data);
+    this.orderService.refreshOrderList.subscribe(data => {
+      if (data === true) {
+        this.getFiltered();
+      }
+    });
+
+    this.orderService.orderGetFilteredObs.subscribe((data) => {
+      this.orders = data;
+    });
+
+    this.employeeService.employeesFromTokenObs.subscribe((data) => {
+      this.employees = data;
+    });
+
+    this.datePickerConfig = {
+      format: 'YYYY-MM-DD'
+    }
   }
 
+  ngOnInit(): void {
+    this.employeeService.getByCompanyIdFromToken();
+  }
+
+  convertDateToMomentString(date: Date) {
+    return this.planService.convertDateToMomentString(date);
+  }
+
+  getFiltered() {
+    var request = new OrderFilteredRequest();
+    request.employeeIds = this.employeeIds;
+    request.fromDate = this.fromDate;
+    request.toDate = this.toDate;
+
+    if (this.employeeIds != null && this.employeeIds.length > 0 && this.fromDate != null && this.toDate != null) {
+      this.orderService.getFiltered(request);
+    }
+  }
+
+  create() {
+    this.orderService.setOrderForCreate();
+  }
+
+  edit(id: number) {
+    this.orderService.getOrderByIdForEdit(id);
+  }
+
+  delete(id: number) {
+    this.orderService.showDeletePopUpById.next(id);
+  }
 }
