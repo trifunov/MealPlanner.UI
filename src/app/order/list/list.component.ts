@@ -58,7 +58,10 @@ export class ListOrderComponent implements OnInit {
     request.fromDate = this.fromDate;
     request.toDate = this.toDate;
 
-    if (this.employeeIds != null && this.employeeIds.length > 0 && this.fromDate != null && this.toDate != null) {
+    if (
+      ((this.loggedInUser.role == 'HR' && this.employeeIds != null && this.employeeIds.length > 0) || this.loggedInUser.role != 'HR')
+      && this.fromDate != null
+      && this.toDate != null) {
       this.orderService.getFiltered(request);
     }
   }

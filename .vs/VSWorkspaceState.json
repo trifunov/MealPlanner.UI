@@ -4,14 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\company",
-    "\\src\\app\\company\\list",
+    "\\src\\app\\employee",
+    "\\src\\app\\employee\\createedit",
     "\\src\\app\\order",
-    "\\src\\app\\order\\list",
-    "\\src\\app\\plan",
-    "\\src\\app\\plan\\report",
+    "\\src\\app\\order\\create",
     "\\src\\app\\shared",
     "\\src\\app\\shared\\services"
   ],
-  "SelectedNode": "\\src\\app\\shared\\services\\employee.service.ts",
+  "SelectedNode": "\\src\\app\\order\\create-edit-from-list\\create-edit-from-list.component.html",
   "PreviewInSolutionExplorer": false
 }

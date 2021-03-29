@@ -10,11 +10,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { OrderCreateEditFromListComponent } from './create-edit-from-list/create-edit-from-list.component';
+import { DeleteComponent } from './delete/delete.component';
 
 
 
 @NgModule({
-  declarations: [CreateOrderComponent, DeliveryComponent, ListOrderComponent, DateShiftSelectComponent, OrderCreateEditFromListComponent],
+  declarations: [CreateOrderComponent, DeliveryComponent, ListOrderComponent, DateShiftSelectComponent, OrderCreateEditFromListComponent, DeleteComponent],
   imports: [
     CommonModule,
     FormsModule,

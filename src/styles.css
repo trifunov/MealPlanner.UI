@@ -102,3 +102,9 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+.div-delete-question {
+  margin-bottom: 8px;
+  font-size: 22px;
+  text-align: center;
+}
