@@ -22,7 +22,14 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.loaderService.isLoading.next(true);
     var token = localStorage.getItem('token');
-    req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+
+    //if (req.url.indexOf('plan/exporttoexcel') == -1) {
+      req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+    //}
+    //else {
+    //  req = req.clone({ headers: req.headers.set('Content-Type', "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") });   
+    //}
+
     req = req.clone({ headers: req.headers.set('Access-Control-Allow-Origin', '*') });
     req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
 

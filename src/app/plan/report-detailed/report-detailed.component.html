@@ -1,10 +1,10 @@
 <div class="row">
-  <div class="col-12 col-md-5 input-margin" *ngIf="loggedInUser.role == 'Administrator'">
+  <div class="col-12 col-md-3 input-margin" *ngIf="loggedInUser.role == 'Administrator'">
     <div class="row">
-        <div class="col-3 col-md-2">
+        <div class="col-3">
           <label>Компанија</label>
         </div>
-        <div class="col-9 col-md-10">
+        <div class="col-9">
           <ng-select [items]="companies"
                      [multiple]="false"
                      [(ngModel)]="companyId"
@@ -17,12 +17,12 @@
         </div>
     </div>
   </div>
-  <div class="col-12 col-md-3 input-margin">
+  <div class="col-12 col-md-2 input-margin">
     <div class="row">
-      <div class="col-3 col-md-1">
+      <div class="col-3">
         <label>Од</label>
       </div>
-      <div class="col-9 col-md-11">
+      <div class="col-9">
         <dp-date-picker theme="dp-material"
                         class="input-margin"
                         [config]="datePickerConfig"
@@ -32,18 +32,54 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-md-3 input-margin">
+  <div class="col-12 col-md-2 input-margin">
     <div class="row">
-      <div class="col-3 col-md-1">
+      <div class="col-3">
         <label>До</label>
       </div>
-      <div class="col-9 col-md-11">
+      <div class="col-9">
         <dp-date-picker theme="dp-material"
                         class="input-margin"
                         [config]="datePickerConfig"
                         [(ngModel)]="toDate"
                         placeholder="До">
         </dp-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-2 input-margin">
+    <div class="row">
+      <div class="col-3">
+        <label>Смена</label>
+      </div>
+      <div class="col-9">
+        <ng-select [items]="shifts"
+                   [multiple]="false"
+                   [(ngModel)]="shift"
+                   bindLabel="name"
+                   bindValue="id">
+          <ng-template ng-option-tmp let-item="item">
+            <label>{{item.name}}</label>
+          </ng-template>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-2 input-margin">
+    <div class="row">
+      <div class="col-3">
+        <label>Подигнати</label>
+      </div>
+      <div class="col-9">
+        <ng-select [items]="deliveries"
+                   [multiple]="false"
+                   [(ngModel)]="delivery"
+                   bindLabel="name"
+                   bindValue="id">
+          <ng-template ng-option-tmp let-item="item">
+            <label>{{item.name}}</label>
+          </ng-template>
+        </ng-select>
       </div>
     </div>
   </div>
@@ -63,7 +99,7 @@
         <th>Датум</th>
         <th>Смена</th>
         <th>Оброк</th>
-        <th>Вкупно нарачки</th>
+        <th>Подигната</th>
       </tr>
     </thead>
     <tbody>
@@ -71,7 +107,14 @@
         <td>{{ convertDateToMomentString(item.date) }}</td>
         <td>{{ item.shift }}</td>
         <td>{{ item.mealName }}</td>
-        <td>{{ item.totalOrders }}</td>
+        <td>
+          <div *ngIf="item.isDelivered === true">
+            <i class="fa fa-check"></i>
+          </div>
+          <div *ngIf="item.isDelivered === false">
+            <i class="fa fa-times"></i>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

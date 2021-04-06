@@ -9,10 +9,11 @@ import { CreateeditPlanComponent } from './createedit/createedit.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { DeleteComponent } from './delete/delete.component';
 import { ReportPlanComponent } from './report/report.component';
+import { ReportPlanDetailedComponent } from './report-detailed/report-detailed.component';
 
 
 @NgModule({
-  declarations: [ListPlanComponent, CreateeditPlanComponent, DeleteComponent, ReportPlanComponent],
+  declarations: [ListPlanComponent, CreateeditPlanComponent, DeleteComponent, ReportPlanComponent, ReportPlanDetailedComponent],
   imports: [
     CommonModule,
     FormsModule,

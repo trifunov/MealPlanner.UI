@@ -12,6 +12,7 @@ import { DeliveryComponent } from './order/delivery/delivery.component';
 import { ListOrderComponent } from './order/list/list.component';
 import { CreateeditPlanComponent } from './plan/createedit/createedit.component';
 import { ListPlanComponent } from './plan/list/list.component';
+import { ReportPlanDetailedComponent } from './plan/report-detailed/report-detailed.component';
 import { ReportPlanComponent } from './plan/report/report.component';
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'plan/list', component: ListPlanComponent },
   { path: 'plan/createedit', component: CreateeditPlanComponent },
   { path: 'plan/report', component: ReportPlanComponent },
+  { path: 'plan/reportdetailed', component: ReportPlanDetailedComponent },
   { path: 'order/create', component: CreateOrderComponent },
   { path: 'order/list', component: ListOrderComponent },
   { path: 'order/delivery', component: DeliveryComponent }

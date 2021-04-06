@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../../shared/models/company';
+import { LoggedInUser } from '../../shared/models/loggedinuser';
 import { PlanReportRequest } from '../../shared/models/plan-report-request';
 import { PlanReportResponse } from '../../shared/models/plan-report-response';
+import { AccountService } from '../../shared/services/account.service';
 import { CompanyService } from '../../shared/services/company.service';
 import { PlanService } from '../../shared/services/plan.service';
 
@@ -18,8 +20,11 @@ export class ReportPlanComponent implements OnInit {
   companyId: number = -1;
   fromDate: string;
   toDate: string;
+  loggedInUser: LoggedInUser;
 
-  constructor(private planService: PlanService, private companyService: CompanyService) {
+  constructor(private planService: PlanService, private companyService: CompanyService, private accountService: AccountService) {
+    this.accountService.loggedInObs.subscribe(data => this.loggedInUser = data);
+
     this.planService.planGetReportsObs.subscribe((data) => {
       this.plans = data;
     });
@@ -47,5 +52,13 @@ export class ReportPlanComponent implements OnInit {
     request.fromDate = this.fromDate;
     request.toDate = this.toDate;
     this.planService.getReports(request);
+  }
+
+  exportToExcel() {
+    var request = new PlanReportRequest();
+    request.companyId = this.companyId;
+    request.fromDate = this.fromDate;
+    request.toDate = this.toDate;
+    this.planService.exportToExcel(request);
   }
 }

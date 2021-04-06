@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\company",
-    "\\src\\app\\employee",
-    "\\src\\app\\employee\\createedit",
+    "\\src\\app\\header",
+    "\\src\\app\\header\\header",
     "\\src\\app\\order",
-    "\\src\\app\\order\\create",
-    "\\src\\app\\shared",
-    "\\src\\app\\shared\\services"
+    "\\src\\app\\order\\list",
+    "\\src\\app\\plan",
+    "\\src\\app\\plan\\report",
+    "\\src\\app\\plan\\report-detailed"
   ],
-  "SelectedNode": "\\src\\app\\order\\create-edit-from-list\\create-edit-from-list.component.html",
+  "SelectedNode": "\\src\\app\\plan\\report-detailed\\report-detailed.component.ts",
   "PreviewInSolutionExplorer": false
 }
