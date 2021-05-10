@@ -108,3 +108,12 @@
   font-size: 22px;
   text-align: center;
 }
+
+.page-footer {
+  height: 70px;
+  background-color: #abb6c2;
+}
+
+.page-footer img {
+    height: 70px;
+}

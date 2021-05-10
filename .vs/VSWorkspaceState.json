@@ -3,14 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\header",
-    "\\src\\app\\header\\header",
-    "\\src\\app\\order",
-    "\\src\\app\\order\\list",
-    "\\src\\app\\plan",
-    "\\src\\app\\plan\\report",
-    "\\src\\app\\plan\\report-detailed"
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\services"
   ],
-  "SelectedNode": "\\src\\app\\plan\\report-detailed\\report-detailed.component.ts",
+  "SelectedNode": "\\src\\app\\shared\\services\\config.service.ts",
   "PreviewInSolutionExplorer": false
 }
