@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CommonName } from '../models/common-name';
 import { Meal } from '../models/meal';
+import { MealPagination } from '../models/meal-pagination';
 import { ConfigService } from './config.service';
 import { OrderService } from './order.service';
 
@@ -19,7 +20,7 @@ export class MealService {
   private mealToEditSource = new BehaviorSubject<Meal>({ id: -1, name: '', nameForeign: '', imageBase64: '', allergens: [], ingredients: [], planId: -1 });
   mealToEditObs = this.mealToEditSource.asObservable();
 
-  private mealGetAllSource = new BehaviorSubject<Meal[]>([]);
+  private mealGetAllSource = new BehaviorSubject<MealPagination>({ meals: [], totalRows: 0 });
   mealGetAllObs = this.mealGetAllSource.asObservable();
 
   private mealGetValidSource = new BehaviorSubject<Meal[]>([]);
@@ -35,8 +36,8 @@ export class MealService {
     this.baseUrl = this.configService.getApiURI();
   }
 
-  getAll() {
-    return this.http.get<Meal[]>(this.baseUrl + "/meal/getall").subscribe(data => {
+  getAll(page: number, itemsPerPage: number) {
+    return this.http.get<MealPagination>(this.baseUrl + "/meal/getall?page=" + page + "&itemsPerPage=" + itemsPerPage).subscribe(data => {
       this.mealGetAllSource.next(data);
     });
   }
@@ -76,7 +77,7 @@ export class MealService {
     return this.http.get(this.baseUrl + "/meal/delete?id=" + id);
   }
 
-  setCompanyForCreate() {
+  setMealForCreate() {
     var meal = new Meal();
     meal.id = 0;
     meal.name = '';
@@ -87,5 +88,12 @@ export class MealService {
 
     this.mealToEditSource.next(meal);
     this.showCreateEditPopUpById.next(0);
+  }
+
+  getById(id: number) {
+    this.http.get<Meal>(this.baseUrl + "/meal/getbyid?id=" + id).subscribe(data => {
+      this.mealToEditSource.next(data);
+      this.showCreateEditPopUpById.next(id);
+    });
   }
 }

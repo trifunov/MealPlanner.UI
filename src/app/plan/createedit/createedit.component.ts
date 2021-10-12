@@ -36,7 +36,7 @@ export class CreateeditPlanComponent implements OnInit {
     this.initShifts = this.configService.getShifts();
 
     this.mealService.mealGetAllObs.subscribe((data) => {
-      this.meals = data;
+      this.meals = data.meals;
     });
 
     this.datePickerConfig = {
@@ -45,7 +45,7 @@ export class CreateeditPlanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mealService.getAll();
+    this.mealService.getAll(1, 20);
     this.ids = this.activatedRoute.snapshot.queryParamMap.get('ids');
 
     if (this.ids == '0') {
@@ -84,9 +84,9 @@ export class CreateeditPlanComponent implements OnInit {
         });
       }
       else {
-        //this.planService.edit(plan).subscribe(data => {
-        //  this.route.navigateByUrl('/plan/list');
-        //});
+        this.planService.edit(plan).subscribe(data => {
+          this.route.navigateByUrl('/plan/list');
+        });
       }
     }
 

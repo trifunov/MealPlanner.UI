@@ -1,3 +1,5 @@
+import { Meal } from "./meal";
+
 export class Plan {
   ids: number[];
   shifts: number[];
@@ -7,5 +9,5 @@ export class Plan {
   date: string;
   companyId: number;
   mealIds: number[];
-  totalMeals: number;
+  meals: Meal[];
 }

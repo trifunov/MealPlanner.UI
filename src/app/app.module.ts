@@ -15,6 +15,7 @@ import { MealModule } from './meal/meal.module';
 import { PlanModule } from './plan/plan.module';
 import { OrderModule } from './order/order.module';
 import { NotifierComponent } from './notifier/notifier/notifier.component';
+import { PaginationModule } from './pagination/pagination.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { NotifierComponent } from './notifier/notifier/notifier.component';
     EmployeeModule,
     MealModule,
     PlanModule,
-    OrderModule
+    OrderModule,
+    PaginationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

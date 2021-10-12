@@ -4,3 +4,9 @@
   border: solid 1px lightgray;
   border-radius: 4px;
 }
+
+.image-size {
+  width: 100px;
+  height: 80px;
+  margin-bottom: 4px;
+}

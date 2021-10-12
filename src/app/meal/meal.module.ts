@@ -7,15 +7,22 @@ import { MealService } from '../shared/services/meal.service';
 import { DeleteComponent } from './delete/delete.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import { PaginationComponent } from '../pagination/pagination/pagination.component';
+import { PaginationModule } from '../pagination/pagination.module';
 
 
 @NgModule({
-  declarations: [ListMealComponent, CreateeditComponent, DeleteComponent],
+  declarations: [
+    ListMealComponent,
+    CreateeditComponent,
+    DeleteComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     NgSelectModule,
-    NgOptionHighlightModule 
+    NgOptionHighlightModule,
+    PaginationModule
   ],
   providers: [MealService],
   bootstrap: [ListMealComponent]

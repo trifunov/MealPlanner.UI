@@ -1,3 +1,8 @@
+/*body {
+  background-image: url(/assets/images/DALMA.png);
+  background-size: cover;
+}*/
+
 /* The Modal (background) */
 .modal {
   display: block;
@@ -116,4 +121,5 @@
 
 .page-footer img {
     height: 70px;
+    width: 8%;
 }

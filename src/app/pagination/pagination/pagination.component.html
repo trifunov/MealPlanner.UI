@@ -1,0 +1,26 @@
+<div class="pagination__container row col-lg-4 offset-lg-4 col-xs-12">
+  <div class="pagination__button pagination__page-first"
+       [ngClass]="currentPage === 1 && 'pagination__button--disabled'"
+       (click)="onFirstPage()">
+    <button class="btn btn-primary"><i class="fa fa-fast-backward"></i></button>
+  </div>
+  <div class="pagination__button pagination__page-previous"
+       [ngClass]="currentPage === 1 && 'pagination__button--disabled'"
+       (click)="onPreviousPage()">
+    <button class="btn btn-primary"><i class="fa fa-step-backward"></i></button>
+  </div>
+  <div class="pagination__page-active row">
+    <!--<div class="pagination__current-page page-width" (input)="onSetPage($event)" [value]="currentPage">{{currentPage}}</div> од <div class="page-width">{{allPagesNumber}}</div>-->
+    <div class="pagination__current-page page-width">{{currentPage}}</div> од <div class="page-width">{{allPagesNumber}}</div>
+  </div>
+  <div class="pagination__button pagination__page-next"
+       [ngClass]="currentPage === allPagesNumber && 'pagination__button--disabled'"
+       (click)="onNextPage()">
+    <button class="btn btn-primary"><i class="fa fa-step-forward"></i></button>
+  </div>
+  <div class="pagination__button pagination__page-last"
+       [ngClass]="currentPage === allPagesNumber && 'pagination__button--disabled'"
+       (click)="onLastPage()">
+    <button class="btn btn-primary"><i class="fa fa-fast-forward"></i></button>
+  </div>
+</div>

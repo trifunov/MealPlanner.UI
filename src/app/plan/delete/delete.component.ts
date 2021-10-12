@@ -24,7 +24,7 @@ export class DeleteComponent implements OnInit {
     if (toDelete === true) {
       this.planService.delete(this.showDeletePopUpByIds).subscribe(data => {
         //this.successfulDelete = true;
-        this.planService.getByCompanyId();
+        this.planService.getByCompanyId(1, 20);
       });
     }
     this.planService.showDeletePopUpByIds.next([0]);

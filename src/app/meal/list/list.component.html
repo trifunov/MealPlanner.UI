@@ -1,10 +1,10 @@
-<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">CREATE</span></button>
+<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">КРЕИРАЈ</span></button>
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Foreign Name</th>
-      <th>Image</th>
+      <th>Назив</th>
+      <th>Странски назив</th>
+      <!--<th>Слика</th>-->
       <th></th>
     </tr>
   </thead>
@@ -12,15 +12,16 @@
     <tr *ngFor="let item of meals">
       <td>{{ item.name }}</td>
       <td>{{ item.nameForeign }}</td>
-      <td><img src="{{item.imageBase64}}" class="image-size" /></td>
+      <!--<td><img src="{{item.imageBase64}}" class="image-size" /></td>-->
       <td>
         <div class="row remove-margin">
-          <!--<button class="btn btn-warning button-icon-padding table-button-margin" (click)="edit(item.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>-->
+          <button class="btn btn-warning button-icon-padding table-button-margin" (click)="edit(item.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
           <button class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
       </td>
     </tr>
   </tbody>
 </table>
+<app-pagination [allPagesNumber]="allPages" (changePage)="onPageChange($event)"></app-pagination>
 <app-meal-createedit></app-meal-createedit>
 <app-meal-delete></app-meal-delete>

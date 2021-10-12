@@ -12,15 +12,18 @@ import { PlanService } from '../../shared/services/plan.service';
 export class ListPlanComponent implements OnInit {
 
   plans: Plan[];
+  itemsPerPage: number = 20;
+  allPages: number = 0;
 
   constructor(private route: Router, private planService: PlanService) {
     this.planService.planGetByCompanyIdObs.subscribe((data) => {
-      this.plans = data;
+      this.plans = data.plans;
+      this.allPages = Math.ceil(data.totalRows / this.itemsPerPage);
     });
   }
 
   ngOnInit(): void {
-    this.planService.getByCompanyId();
+    this.planService.getByCompanyId(1, this.itemsPerPage);
   }
 
   create() {
@@ -37,5 +40,9 @@ export class ListPlanComponent implements OnInit {
 
   convertDateToMomentString(date: Date) {
     return this.planService.convertDateToMomentString(date);
+  }
+
+  onPageChange(page: number = 1): void {
+    this.planService.getByCompanyId(page, this.itemsPerPage);
   }
 }

@@ -10,6 +10,7 @@ import { PlanReportResponse } from '../models/plan-report-response';
 import { ConfigService } from './config.service';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
+import { PlanPagination } from '../models/plan-pagination';
 
 @Injectable({
   providedIn: 'root'
@@ -29,11 +30,11 @@ export class PlanService {
     editableTo: moment().format('YYYY-MM-DD'),
     companyId: -1,
     mealIds: [],
-    totalMeals: 0
+    meals: []
   });
   planToEditObs = this.planToEditSource.asObservable();
 
-  private planGetByCompanyIdSource = new BehaviorSubject<Plan[]>([]);
+  private planGetByCompanyIdSource = new BehaviorSubject<PlanPagination>({ plans: [], totalRows: 0 });
   planGetByCompanyIdObs = this.planGetByCompanyIdSource.asObservable();
 
   private planGetReportsSource = new BehaviorSubject<PlanReportResponse[]>([]);
@@ -46,8 +47,8 @@ export class PlanService {
     this.baseUrl = this.configService.getApiURI();
   }
 
-  getByCompanyId() {
-    return this.http.get<Plan[]>(this.baseUrl + "/plan/getbycompanyid").subscribe(data => {
+  getByCompanyId(page: number, itemsPerPage: number) {
+    return this.http.get<PlanPagination>(this.baseUrl + "/plan/getbycompanyid?page=" + page + "&itemsPerPage=" + itemsPerPage).subscribe(data => {
       this.planGetByCompanyIdSource.next(data);
     });
   }
@@ -92,6 +93,10 @@ export class PlanService {
 
   create(plan: Plan) {
     return this.http.post(this.baseUrl + "/plan/add", plan);
+  }
+
+  edit(plan: Plan) {
+    return this.http.post(this.baseUrl + "/plan/update", plan);
   }
 
   delete(ids: number[]) {

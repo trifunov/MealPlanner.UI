@@ -10,27 +10,33 @@ import { MealService } from '../../shared/services/meal.service';
 export class ListMealComponent implements OnInit {
 
   meals: Meal[];
+  itemsPerPage: number = 20;
+  allPages: number = 0;
 
   constructor(private mealService: MealService) {
     this.mealService.mealGetAllObs.subscribe((data) => {
-      this.meals = data;
+      this.meals = data.meals;
+      this.allPages = Math.ceil(data.totalRows / this.itemsPerPage);
     });
   }
 
   ngOnInit(): void {
-    this.mealService.getAll();
+    this.mealService.getAll(1, this.itemsPerPage);
   }
 
   create() {
-    this.mealService.setCompanyForCreate();
+    this.mealService.setMealForCreate();
   }
 
-  //edit(id: number) {
-  //  this.companyService.getCompanyByIdForEdit(id);
-  //}
+  edit(id: number) {
+    this.mealService.getById(id);
+  }
 
   delete(id: number) {
     this.mealService.showDeletePopUpById.next(id);
   }
 
+  onPageChange(page: number = 1): void {
+    this.mealService.getAll(page, this.itemsPerPage);
+  }
 }

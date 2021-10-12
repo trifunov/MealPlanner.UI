@@ -10,16 +10,25 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import { DeleteComponent } from './delete/delete.component';
 import { ReportPlanComponent } from './report/report.component';
 import { ReportPlanDetailedComponent } from './report-detailed/report-detailed.component';
+import { PaginationComponent } from '../pagination/pagination/pagination.component';
+import { PaginationModule } from '../pagination/pagination.module';
 
 
 @NgModule({
-  declarations: [ListPlanComponent, CreateeditPlanComponent, DeleteComponent, ReportPlanComponent, ReportPlanDetailedComponent],
+  declarations: [
+    ListPlanComponent,
+    CreateeditPlanComponent,
+    DeleteComponent,
+    ReportPlanComponent,
+    ReportPlanDetailedComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     NgSelectModule,
     NgOptionHighlightModule,
-    DpDatePickerModule
+    DpDatePickerModule,
+    PaginationModule
   ],
   providers: [PlanService],
   bootstrap: [ListPlanComponent]

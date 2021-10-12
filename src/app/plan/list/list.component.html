@@ -1,12 +1,12 @@
-<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">CREATE</span></button>
+<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">ДОДАДИ</span></button>
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Active date</th>
-      <th>Editable from</th>
-      <th>Editable to</th>
-      <th>Shifts</th>
-      <th>Total meals</th>
+      <th>Активен датум</th>
+      <th>Промена од</th>
+      <th>Промена до</th>
+      <th>Смени</th>
+      <th>Оброци</th>
       <th></th>
     </tr>
   </thead>
@@ -18,13 +18,17 @@
       <td>
         <span *ngFor="let shift of item.shiftNames">{{ shift }}<br /></span>
       </td>
-      <td><a href="/plan/createedit?ids={{ item.ids }}">{{ item.totalMeals }}</a></td>
+      <td>
+        <span *ngFor="let meal of item.meals">{{ meal.name }}<br /></span>
+      </td>
       <td>
         <div class="row remove-margin">
+          <button class="btn btn-warning button-icon-padding table-button-margin" (click)="edit(item.ids)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
           <button class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.ids)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
       </td>
       </tr>
   </tbody>
 </table>
+<app-pagination [allPagesNumber]="allPages" (changePage)="onPageChange($event)"></app-pagination>
 <app-plan-delete></app-plan-delete>

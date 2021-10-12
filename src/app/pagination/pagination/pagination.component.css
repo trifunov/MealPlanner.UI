@@ -1,0 +1,22 @@
+.pagination__container div {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.pagination__container {
+  margin-bottom: 4px;
+}
+
+  .pagination__container button {
+    width: 42px;
+  }
+
+  .page-width {
+      width: 42px;
+  }
+
+.pagination__page-active {
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: center;
+}

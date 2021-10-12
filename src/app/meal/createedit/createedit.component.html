@@ -5,6 +5,7 @@
         <input required class="form-control input-margin" placeholder="Meal Name" [(ngModel)]="name" />
         <input class="form-control input-margin" placeholder="Meal Foreign Name" [(ngModel)]="nameForeign" />
         <input class="input-margin" type="file" (change)="fileChangeEvent($event)" />
+        <img src="{{imageBase64}}" class="image-size" />
 
         <div class="array-main-div input-margin">
           <ng-container *ngFor="let item of ingredients; let i = index;">
