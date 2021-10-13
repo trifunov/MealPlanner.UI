@@ -45,7 +45,7 @@ export class CreateeditPlanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mealService.getAll(1, 20);
+    this.mealService.getAll(1, 20, false);
     this.ids = this.activatedRoute.snapshot.queryParamMap.get('ids');
 
     if (this.ids == '0') {

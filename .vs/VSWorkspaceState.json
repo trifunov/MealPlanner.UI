@@ -3,9 +3,10 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\account",
+    "\\src\\app\\account\\login",
     "\\src\\app\\plan",
     "\\src\\app\\plan\\list"
   ],
-  "SelectedNode": "\\src\\app\\plan\\plan.module.ts",
   "PreviewInSolutionExplorer": false
 }

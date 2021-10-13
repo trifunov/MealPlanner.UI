@@ -21,7 +21,7 @@ export class ListMealComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mealService.getAll(1, this.itemsPerPage);
+    this.mealService.getAll(1, this.itemsPerPage, true);
   }
 
   create() {
@@ -37,6 +37,6 @@ export class ListMealComponent implements OnInit {
   }
 
   onPageChange(page: number = 1): void {
-    this.mealService.getAll(page, this.itemsPerPage);
+    this.mealService.getAll(page, this.itemsPerPage, true);
   }
 }

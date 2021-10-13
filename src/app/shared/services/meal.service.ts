@@ -36,8 +36,8 @@ export class MealService {
     this.baseUrl = this.configService.getApiURI();
   }
 
-  getAll(page: number, itemsPerPage: number) {
-    return this.http.get<MealPagination>(this.baseUrl + "/meal/getall?page=" + page + "&itemsPerPage=" + itemsPerPage).subscribe(data => {
+  getAll(page: number, itemsPerPage: number, paged: boolean) {
+    return this.http.get<MealPagination>(this.baseUrl + "/meal/getall?page=" + page + "&itemsPerPage=" + itemsPerPage + "&paged=" + paged).subscribe(data => {
       this.mealGetAllSource.next(data);
     });
   }

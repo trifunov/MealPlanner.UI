@@ -123,3 +123,11 @@
     height: 70px;
     width: 8%;
 }
+
+.img-logo-background {
+  height: 100%;
+}
+
+.div-logo-background {
+  text-align: center;
+}
