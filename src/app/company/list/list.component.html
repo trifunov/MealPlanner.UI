@@ -1,4 +1,4 @@
-<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">КРЕИРАЈ</span></button>
+<button *ngIf="loggedInUser.role == 'Administrator'" class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">КРЕИРАЈ</span></button>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -15,8 +15,8 @@
       <td><a href="/employee/list?companyId={{ item.id }}">{{ item.totalEmployees }}</a></td>
       <td>
         <div class="row remove-margin">
-          <button class="btn btn-warning button-icon-padding table-button-margin" (click)="edit(item.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-          <button class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
+          <button *ngIf="loggedInUser.role == 'Administrator'" class="btn btn-warning button-icon-padding table-button-margin" (click)="edit(item.id)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+          <button *ngIf="loggedInUser.role == 'Administrator'" class="btn btn-danger button-icon-padding table-button-margin" (click)="delete(item.id)"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
       </td>
     </tr>

@@ -47,6 +47,10 @@ export class ListEmployeeComponent implements OnInit {
     }
   }
 
+  resetPassword(employee: UserEmployee) {
+    this.employeeService.setUserForResetPassword(employee);
+  }
+
   delete(id: number, userId: string) {
     this.employeeService.delete(id, userId);
   }

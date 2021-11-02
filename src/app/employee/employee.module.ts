@@ -4,11 +4,12 @@ import { ListEmployeeComponent } from './list/list.component';
 import { FormsModule } from '@angular/forms';
 import { EmployeeService } from '../shared/services/employee.service';
 import { CreateeditComponent } from './createedit/createedit.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
 @NgModule({
-  declarations: [ListEmployeeComponent, CreateeditComponent],
+  declarations: [ListEmployeeComponent, CreateeditComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     FormsModule

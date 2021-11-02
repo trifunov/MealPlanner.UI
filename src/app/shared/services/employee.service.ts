@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Employee } from '../models/employee';
 import { Order } from '../models/order';
+import { User } from '../models/user';
 import { UserEmployee } from '../models/useremployee';
 import { ConfigService } from './config.service';
 
@@ -13,9 +14,13 @@ export class EmployeeService {
 
   baseUrl: string = '';
   public showCreateEditPopUpById = new BehaviorSubject(-1);
+  public showResetPasswordPopUp = new BehaviorSubject('');
 
   private employeeToEditSource = new BehaviorSubject<UserEmployee>({ id: -1, companyId: 0, companyName: '', rfid: '', username: '', email: '', password: '', role: '', userId: '' });
   employeeToEditObs = this.employeeToEditSource.asObservable();
+
+  private userToResetPasswordSource = new BehaviorSubject<User>({ username: '', password: '', userId: '' });
+  userToResetPasswordObs = this.userToResetPasswordSource.asObservable();
 
   private employeesSource = new BehaviorSubject<UserEmployee[]>([]);
   employeesObs = this.employeesSource.asObservable();
@@ -65,6 +70,16 @@ export class EmployeeService {
     this.showCreateEditPopUpById.next(0);
   }
 
+  setUserForResetPassword(employee: UserEmployee) {
+    var user = new User();
+    user.userId = employee.userId;
+    user.username = employee.username;
+    user.password = employee.password;
+
+    this.userToResetPasswordSource.next(user);
+    this.showResetPasswordPopUp.next(employee.userId);
+  }
+
   create(employee: UserEmployee) {
     return this.http.post(this.baseUrl + "/employee/add", employee);
   }
@@ -75,5 +90,9 @@ export class EmployeeService {
 
   delete(id: number, userId: string) {
     return this.http.get(this.baseUrl + "/employee/delete?id=" + id + "&userId=" + userId);
+  }
+
+  resetPassword(user: User) {
+    return this.http.get(this.baseUrl + "/employee/resetPassword?userId=" + user.userId + "&password=" + user.password);
   }
 }
