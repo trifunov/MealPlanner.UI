@@ -19,9 +19,6 @@ export class DeliveryComponent implements OnInit {
   @ViewChild("rfidField") rfidField: ElementRef;
 
   constructor(private orderService: OrderService) {
-    this.orderService.currentOrderObs.subscribe((data) => {
-      this.currentOrder = data;
-    });
   }
 
   ngOnInit(): void {
@@ -35,14 +32,25 @@ export class DeliveryComponent implements OnInit {
   }
 
   getOrderByRfid() {
-    this.orderService.getByRfid(this.rfid, this.selectedShift, this.selectedDate);
+    this.orderService.getByRfid(this.rfid, this.selectedShift, this.selectedDate).subscribe(data => {
+      this.currentOrder = data;
+      if (data == null) {
+        this.rfid = '';
+        this.rfidField.nativeElement.focus();
+      }
+    });
   }
 
-  deliveredOrder(orderId: number) {
-    this.orderService.delivered(orderId).subscribe(data => {
+  deliveredOrder(orderId: number, softMealId: number) {
+    this.orderService.delivered(orderId, softMealId).subscribe(data => {
       this.currentOrder = null;
       this.rfid = '';
       this.rfidField.nativeElement.focus();
-    });
+    },
+      err => {
+        this.currentOrder = null;
+        this.rfid = '';
+        this.rfidField.nativeElement.focus();
+      });
   }
 }

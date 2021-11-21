@@ -26,9 +26,6 @@ export class OrderService {
   private selectedPlanSource = new BehaviorSubject<number>(0);
   selectedPlanObs = this.selectedPlanSource.asObservable();
 
-  private currentOrderSource = new BehaviorSubject<OrderDelivery>(null);
-  currentOrderObs = this.currentOrderSource.asObservable();
-
   private orderGetFilteredSource = new BehaviorSubject<OrderFilteredResponse[]>(null);
   orderGetFilteredObs = this.orderGetFilteredSource.asObservable();
 
@@ -75,8 +72,8 @@ export class OrderService {
     return this.http.get(this.baseUrl + "/order/delete?id=" + id);
   }
 
-  delivered(id: number) {
-    return this.http.get(this.baseUrl + "/order/delivered?id=" + id);
+  delivered(orderId: number, softMealId: number) {
+    return this.http.get(this.baseUrl + "/order/delivered?orderId=" + orderId + "&softMealId=" + softMealId);
   }
 
   getByDateAndShift(shift: number, date: string) {
@@ -86,9 +83,7 @@ export class OrderService {
   }
 
   getByRfid(rfid: string, shift: number, date: string) {
-    return this.http.post<OrderDelivery>(this.baseUrl + "/order/getByRfid", { rfid: rfid, date: date, shift: shift }).subscribe(data => {
-      this.currentOrderSource.next(data);
-    });
+    return this.http.post<OrderDelivery>(this.baseUrl + "/order/getByRfid", { rfid: rfid, date: date, shift: shift });
   }
 
   getFiltered(request: OrderFilteredRequest) {

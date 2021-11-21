@@ -3,10 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\account",
-    "\\src\\app\\account\\login",
-    "\\src\\app\\plan",
-    "\\src\\app\\plan\\list"
+    "\\src\\app\\shared",
+    "\\src\\app\\shared\\services"
   ],
+  "SelectedNode": "\\src\\app\\authinterceptor.ts",
   "PreviewInSolutionExplorer": false
 }
