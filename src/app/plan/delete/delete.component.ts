@@ -10,10 +10,15 @@ export class DeleteComponent implements OnInit {
 
   showDeletePopUpByIds: number[];
   successfulDelete: boolean;
+  companyId: number = 0;
 
   constructor(private planService: PlanService) {
     this.planService.showDeletePopUpByIds.subscribe((data) => {
       this.showDeletePopUpByIds = data;
+    });
+
+    this.planService.selectedCompanyIdForSearch.subscribe((data) => {
+      this.companyId = data;
     });
   }
 
@@ -24,7 +29,7 @@ export class DeleteComponent implements OnInit {
     if (toDelete === true) {
       this.planService.delete(this.showDeletePopUpByIds).subscribe(data => {
         //this.successfulDelete = true;
-        this.planService.getByCompanyId(1, 20);
+        this.planService.getByCompanyId(this.companyId, 1, 20);
       });
     }
     this.planService.showDeletePopUpByIds.next([0]);

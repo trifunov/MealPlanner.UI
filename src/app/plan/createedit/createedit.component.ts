@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { Company } from '../../shared/models/company';
 import { Meal } from '../../shared/models/meal';
 import { Plan } from '../../shared/models/plan';
+import { CompanyService } from '../../shared/services/company.service';
 import { ConfigService } from '../../shared/services/config.service';
 import { MealService } from '../../shared/services/meal.service';
 import { PlanService } from '../../shared/services/plan.service';
@@ -19,17 +21,20 @@ export class CreateeditPlanComponent implements OnInit {
   editableFrom: string;
   editableTo: string;
   meals: Meal[];
+  companies: Company[];
   mealIds: number[];
   shifts: number[];
+  companyId: number;
   initShifts;
   datePickerConfig;
 
-  constructor(private activatedRoute: ActivatedRoute, private route: Router, private planService: PlanService, private configService: ConfigService, private mealService: MealService) {
+  constructor(private activatedRoute: ActivatedRoute, private route: Router, private planService: PlanService, private configService: ConfigService, private mealService: MealService, private companyService: CompanyService) {
     this.planService.planToEditObs.subscribe((data) => {
       this.date = moment(data.date).format('YYYY-MM-DD');
       this.editableFrom = moment(data.editableFrom).format('YYYY-MM-DD');
       this.editableTo = moment(data.editableTo).format('YYYY-MM-DD');
       this.mealIds = data.mealIds;
+      this.companyId = data.companyId;
       this.shifts = data.shifts;
     });
 
@@ -39,6 +44,10 @@ export class CreateeditPlanComponent implements OnInit {
       this.meals = data.meals;
     });
 
+    this.companyService.companyGetAllObs.subscribe((data) => {
+      this.companies = data;
+    });
+
     this.datePickerConfig = {
       format: 'YYYY-MM-DD'
     }
@@ -46,6 +55,7 @@ export class CreateeditPlanComponent implements OnInit {
 
   ngOnInit(): void {
     this.mealService.getAll(1, 20, false);
+    this.companyService.getAll();
     this.ids = this.activatedRoute.snapshot.queryParamMap.get('ids');
 
     if (this.ids == '0') {
@@ -77,6 +87,7 @@ export class CreateeditPlanComponent implements OnInit {
       plan.editableTo = this.editableTo;
       plan.shifts = this.shifts;
       plan.mealIds = this.mealIds;
+      plan.companyId = this.companyId;
 
       if (this.ids == '0') {
         this.planService.create(plan).subscribe(data => {

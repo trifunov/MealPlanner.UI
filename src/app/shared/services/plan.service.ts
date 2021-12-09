@@ -21,6 +21,8 @@ export class PlanService {
 
   public showDeletePopUpByIds = new BehaviorSubject([0]);
 
+  public selectedCompanyIdForSearch = new BehaviorSubject(0);
+
   private planToEditSource = new BehaviorSubject<Plan>({
     ids: [],
     shifts: [],
@@ -47,8 +49,8 @@ export class PlanService {
     this.baseUrl = this.configService.getApiURI();
   }
 
-  getByCompanyId(page: number, itemsPerPage: number) {
-    return this.http.get<PlanPagination>(this.baseUrl + "/plan/getbycompanyid?page=" + page + "&itemsPerPage=" + itemsPerPage).subscribe(data => {
+  getByCompanyId(companyId: number, page: number, itemsPerPage: number) {
+    return this.http.get<PlanPagination>(this.baseUrl + "/plan/getbycompanyid?companyId=" + companyId + "&page=" + page + "&itemsPerPage=" + itemsPerPage).subscribe(data => {
       this.planGetByCompanyIdSource.next(data);
     });
   }

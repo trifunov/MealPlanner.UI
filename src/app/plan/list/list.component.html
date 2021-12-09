@@ -1,4 +1,33 @@
-<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">ДОДАДИ</span></button>
+
+<div class="row">
+  <div class="col-12 col-md-10 input-margin">
+    <div class="row">
+      <div class="col-3 col-md-2">
+        <label>Компанија</label>
+      </div>
+      <div class="col-9 col-md-10">
+        <ng-select [items]="companies"
+                   [multiple]="false"
+                   [(ngModel)]="companyId"
+                   bindLabel="name"
+                   bindValue="id">
+          <ng-template ng-option-tmp let-item="item">
+            <label>{{item.name}}</label>
+          </ng-template>
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-2 input-margin">
+    <button class="btn btn-primary" (click)="search()">
+      <i class="fa fa-search"></i>
+    </button>
+    <button class="btn btn-primary" style="margin-left: 4px;" (click)="create()">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      <span class="button-span-create">ДОДАДИ</span>
+    </button>
+  </div>
+</div>
 <table class="table table-bordered">
   <thead>
     <tr>
