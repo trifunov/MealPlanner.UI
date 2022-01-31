@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlanGetByCompanyIdRequest } from '../../shared/models/plan-get-by-company-id-request';
 import { PlanService } from '../../shared/services/plan.service';
 
 @Component({
@@ -28,11 +29,19 @@ export class DeleteComponent implements OnInit {
   proceed(toDelete: boolean) {
     if (toDelete === true) {
       this.planService.delete(this.showDeletePopUpByIds).subscribe(data => {
-        //this.successfulDelete = true;
-        this.planService.getByCompanyId(this.companyId, 1, 20);
+        this.getByCompanyId();
       });
     }
     this.planService.showDeletePopUpByIds.next([0]);
   }
 
+  getByCompanyId() {
+    var request = new PlanGetByCompanyIdRequest();
+    request.companyId = this.companyId;
+    request.fromDate = new Date().toDateString();
+    request.toDate = new Date().toDateString();
+    request.page = 1;
+    request.itemsPerPage = 20;
+    this.planService.getByCompanyId(request);
+  }
 }

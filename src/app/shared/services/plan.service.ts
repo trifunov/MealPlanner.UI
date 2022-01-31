@@ -11,6 +11,7 @@ import { ConfigService } from './config.service';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import { PlanPagination } from '../models/plan-pagination';
+import { PlanGetByCompanyIdRequest } from '../models/plan-get-by-company-id-request';
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +50,8 @@ export class PlanService {
     this.baseUrl = this.configService.getApiURI();
   }
 
-  getByCompanyId(companyId: number, page: number, itemsPerPage: number) {
-    return this.http.get<PlanPagination>(this.baseUrl + "/plan/getbycompanyid?companyId=" + companyId + "&page=" + page + "&itemsPerPage=" + itemsPerPage).subscribe(data => {
+  getByCompanyId(request: PlanGetByCompanyIdRequest) {
+    return this.http.post<PlanPagination>(this.baseUrl + "/plan/getbycompanyid", request).subscribe(data => {
       this.planGetByCompanyIdSource.next(data);
     });
   }

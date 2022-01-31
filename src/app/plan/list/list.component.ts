@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { Company } from '../../shared/models/company';
 import { Plan } from '../../shared/models/plan';
+import { PlanGetByCompanyIdRequest } from '../../shared/models/plan-get-by-company-id-request';
 import { CompanyService } from '../../shared/services/company.service';
 import { PlanService } from '../../shared/services/plan.service';
 
@@ -16,8 +17,12 @@ export class ListPlanComponent implements OnInit {
   plans: Plan[];
   companies: Company[];
   companyId: number = -1;
+  page: number = 1;
   itemsPerPage: number = 20;
   allPages: number = 0;
+  fromDate: string;
+  toDate: string;
+  datePickerConfig;
 
   constructor(private route: Router, private planService: PlanService, private companyService: CompanyService) {
     this.planService.planGetByCompanyIdObs.subscribe((data) => {
@@ -28,6 +33,10 @@ export class ListPlanComponent implements OnInit {
     this.companyService.companyGetAllObs.subscribe((data) => {
       this.companies = data;
     });
+
+    this.datePickerConfig = {
+      format: 'YYYY-MM-DD'
+    }
   }
 
   ngOnInit(): void {
@@ -39,7 +48,8 @@ export class ListPlanComponent implements OnInit {
   search() {
     if (this.companyId && this.companyId > 0) {
       this.planService.selectedCompanyIdForSearch.next(this.companyId);
-      this.planService.getByCompanyId(this.companyId, 1, this.itemsPerPage);
+      this.page = 1;
+      this.getByCompanyId();
     }
     else {
       this.plans = [];
@@ -63,6 +73,17 @@ export class ListPlanComponent implements OnInit {
   }
 
   onPageChange(page: number = 1): void {
-    this.planService.getByCompanyId(this.companyId, page, this.itemsPerPage);
+    this.page = page;
+    this.getByCompanyId();
+  }
+
+  getByCompanyId() {
+    var request = new PlanGetByCompanyIdRequest();
+    request.companyId = this.companyId;
+    request.fromDate = this.fromDate;
+    request.toDate = this.toDate;
+    request.page = this.page;
+    request.itemsPerPage = this.itemsPerPage;
+    this.planService.getByCompanyId(request);
   }
 }

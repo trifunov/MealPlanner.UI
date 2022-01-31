@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="col-12 col-md-10 input-margin">
+  <div class="col-12 col-md-4 input-margin">
     <div class="row">
       <div class="col-3 col-md-2">
         <label>Компанија</label>
@@ -15,6 +15,36 @@
             <label>{{item.name}}</label>
           </ng-template>
         </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3 input-margin">
+    <div class="row">
+      <div class="col-3 col-md-1">
+        <label>Од</label>
+      </div>
+      <div class="col-9 col-md-11">
+        <dp-date-picker theme="dp-material"
+                        class="input-margin"
+                        [config]="datePickerConfig"
+                        [(ngModel)]="fromDate"
+                        placeholder="Од">
+        </dp-date-picker>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3 input-margin">
+    <div class="row">
+      <div class="col-3 col-md-1">
+        <label>До</label>
+      </div>
+      <div class="col-9 col-md-11">
+        <dp-date-picker theme="dp-material"
+                        class="input-margin"
+                        [config]="datePickerConfig"
+                        [(ngModel)]="toDate"
+                        placeholder="До">
+        </dp-date-picker>
       </div>
     </div>
   </div>
