@@ -15,7 +15,7 @@
       <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator'">
         <a class="nav-link" href="/meal/list">Оброк</a>
       </li>
-      <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator' || loggedInUser.role == 'Manager'  || loggedInUser.role == 'HR'">
+      <li class="nav-item" *ngIf="loggedInUser.role == 'Administrator' || loggedInUser.role == 'Manager'">
         <a class="nav-link" href="/plan/list">План</a>
       </li>
       <li class="nav-item dropdown" *ngIf="loggedInUser.role == 'Administrator' || loggedInUser.role == 'Manager' || loggedInUser.role == 'HR'">
