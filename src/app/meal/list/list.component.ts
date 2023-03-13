@@ -12,6 +12,7 @@ export class ListMealComponent implements OnInit {
   meals: Meal[];
   itemsPerPage: number = 20;
   allPages: number = 0;
+  mealName: string = '';
 
   constructor(private mealService: MealService) {
     this.mealService.mealGetAllObs.subscribe((data) => {
@@ -21,7 +22,11 @@ export class ListMealComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mealService.getAll(1, this.itemsPerPage, true);
+    this.mealService.getAll(this.mealName, 1, this.itemsPerPage, true);
+  }
+
+  search() {
+    this.mealService.getAll(this.mealName, 1, this.itemsPerPage, true);
   }
 
   create() {
@@ -37,6 +42,6 @@ export class ListMealComponent implements OnInit {
   }
 
   onPageChange(page: number = 1): void {
-    this.mealService.getAll(page, this.itemsPerPage, true);
+    this.mealService.getAll(this.mealName, page, this.itemsPerPage, true);
   }
 }

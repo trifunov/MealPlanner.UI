@@ -62,13 +62,13 @@ export class CreateeditComponent implements OnInit {
       if (this.showCreateEditPopUpById == 0) {
         this.mealService.create(meal).subscribe(data => {
           //this.successfulSave = true;
-          this.mealService.getAll(1, 20, true);
+          this.mealService.getAll('', 1, 20, true);
         });
       }
       else {
         this.mealService.edit(meal).subscribe(data => {
           //this.successfulSave = true;
-          this.mealService.getAll(1, 20, true);
+          this.mealService.getAll('', 1, 20, true);
         });
       }
     }

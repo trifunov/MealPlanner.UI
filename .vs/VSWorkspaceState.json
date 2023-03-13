@@ -1,16 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\app",
-    "\\src\\app\\order",
-    "\\src\\app\\plan",
-    "\\src\\app\\plan\\delete",
-    "\\src\\app\\plan\\list",
-    "\\src\\app\\plan\\report",
-    "\\src\\app\\shared",
-    "\\src\\app\\shared\\models"
+    ""
   ],
-  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }

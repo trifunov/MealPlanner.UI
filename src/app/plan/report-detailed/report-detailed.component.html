@@ -1,20 +1,20 @@
 <div class="row">
   <div class="col-12 col-md-3 input-margin" *ngIf="loggedInUser.role == 'Administrator'">
     <div class="row">
-        <div class="col-3">
-          <label>Компанија</label>
-        </div>
-        <div class="col-9">
-          <ng-select [items]="companies"
-                     [multiple]="false"
-                     [(ngModel)]="companyId"
-                     bindLabel="name"
-                     bindValue="id">
-            <ng-template ng-option-tmp let-item="item">
-              <label>{{item.name}}</label>
-            </ng-template>
-          </ng-select>
-        </div>
+      <div class="col-3">
+        <label>Компанија</label>
+      </div>
+      <div class="col-9">
+        <ng-select [items]="companies"
+                   [multiple]="false"
+                   [(ngModel)]="companyId"
+                   bindLabel="name"
+                   bindValue="id">
+          <ng-template ng-option-tmp let-item="item">
+            <label>{{item.name}}</label>
+          </ng-template>
+        </ng-select>
+      </div>
     </div>
   </div>
   <div class="col-12 col-md-2 input-margin">
@@ -99,7 +99,10 @@
         <th>Датум</th>
         <th>Смена</th>
         <th>Оброк</th>
+        <th>Корисник</th>
+        <th>RFID</th>
         <th>Подигната</th>
+        <th>Време на подигнување</th>
       </tr>
     </thead>
     <tbody>
@@ -107,12 +110,19 @@
         <td>{{ convertDateToMomentString(item.date) }}</td>
         <td>{{ item.shift }}</td>
         <td>{{ item.mealName }}</td>
+        <td>{{ item.username }}</td>
+        <td>{{ item.rfid }}</td>
         <td>
           <div *ngIf="item.isDelivered === true">
             <i class="fa fa-check"></i>
           </div>
           <div *ngIf="item.isDelivered === false">
             <i class="fa fa-times"></i>
+          </div>
+        </td>
+        <td>
+          <div *ngIf="item.isDelivered === true">
+            <span>{{ convertDateToMomentString(item.deliveredDate) }}</span>
           </div>
         </td>
       </tr>

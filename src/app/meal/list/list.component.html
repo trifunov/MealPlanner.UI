@@ -1,4 +1,22 @@
-<button class="btn btn-primary button-create-company" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">КРЕИРАЈ</span></button>
+<div class="row">
+  <div class="col-12 col-md-9 input-margin">
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <input class="form-control" placeholder="Оброк" [(ngModel)]="mealName" />
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-3 input-margin">
+    <button class="btn btn-primary" (click)="search()">
+      <i class="fa fa-search"></i>
+    </button>
+    <button class="btn btn-primary" style="margin-left: 4px;" (click)="create()">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      <span class="button-span-create">ДОДАДИ</span>
+    </button>
+  </div>
+</div>
+
 <table class="table table-bordered">
   <thead>
     <tr>
