@@ -1,6 +1,26 @@
 <div class="row">
-  <div class="col-lg-3 col-6"><h4>Вработени за {{ companyName }}</h4></div>
-  <div class="col-lg-3 col-6"><button class="btn btn-primary button-create-company" (click)="createEdit(0)"><i class="fa fa-plus" aria-hidden="true"></i><span class="button-span-create">ДОДАДИ</span></button></div>
+  <div class="col-12 col-lg-4 input-margin">
+    <h4>Вработени за {{ companyName }}</h4>
+  </div>
+  <div class="col-12 col-lg-4 input-margin">
+    <div class="row">
+      <div class="col-12 col-md-12">
+        <input class="form-control" placeholder="Вработен" [(ngModel)]="employeeName" />
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-4 input-margin">
+    <button class="btn btn-primary" (click)="search()">
+      <i class="fa fa-search"></i>
+    </button>
+    <button class="btn btn-primary table-button-margin" (click)="exportToExcel()">
+      <i class="fa fa-download"></i>
+    </button>
+    <button class="btn btn-primary table-button-margin" (click)="createEdit(0)">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      <span class="button-span-create">ДОДАДИ</span>
+    </button>
+  </div>
 </div>
 <table class="table table-bordered">
   <thead>
@@ -26,5 +46,6 @@
     </tr>
   </tbody>
 </table>
+<app-pagination [allPagesNumber]="allPages" (changePage)="onPageChange($event)"></app-pagination>
 <app-employee-createedit></app-employee-createedit>
 <app-employee-resetpassword></app-employee-resetpassword>

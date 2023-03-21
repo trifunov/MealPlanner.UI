@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Company } from '../../shared/models/company';
 import { Employee } from '../../shared/models/employee';
+import { EmployeeGetByCompanyIdRequest } from '../../shared/models/employee-get-by-company-id-request';
 import { LoggedInUser } from '../../shared/models/loggedinuser';
 import { UserEmployee } from '../../shared/models/useremployee';
 import { AccountService } from '../../shared/services/account.service';
@@ -73,14 +74,26 @@ export class CreateeditComponent implements OnInit {
         employee.password = this.password;
         this.employeeService.create(employee).subscribe(data => {
           //this.successfulSave = true;
-          this.employeeService.getByCompanyId(this.route.snapshot.queryParamMap.get('companyId'));
+          var request = new EmployeeGetByCompanyIdRequest();
+          request.companyId = this.route.snapshot.queryParamMap.get('companyId');
+          request.employeeName = '';
+          request.page = 1;
+          request.itemsPerPage = 20;
+          request.paged = true;
+          this.employeeService.getByCompanyId(request);
         });
       }
       else {
         employee.password = "";
         this.employeeService.edit(employee).subscribe(data => {
           //this.successfulSave = true;
-          this.employeeService.getByCompanyId(this.route.snapshot.queryParamMap.get('companyId'));
+          var request = new EmployeeGetByCompanyIdRequest();
+          request.companyId = this.route.snapshot.queryParamMap.get('companyId');
+          request.employeeName = '';
+          request.page = 1;
+          request.itemsPerPage = 20;
+          request.paged = true;
+          this.employeeService.getByCompanyId(request);
         });
       }
     }

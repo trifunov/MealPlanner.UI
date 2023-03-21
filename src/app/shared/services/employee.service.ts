@@ -2,10 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Employee } from '../models/employee';
+import { EmployeeGetByCompanyIdRequest } from '../models/employee-get-by-company-id-request';
 import { Order } from '../models/order';
 import { User } from '../models/user';
+import { UserEmployeePagination } from '../models/user-employee-pagination';
 import { UserEmployee } from '../models/useremployee';
 import { ConfigService } from './config.service';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +29,9 @@ export class EmployeeService {
   private employeesSource = new BehaviorSubject<UserEmployee[]>([]);
   employeesObs = this.employeesSource.asObservable();
 
+  private employeesPagedSource = new BehaviorSubject<UserEmployeePagination>({ userEmployees: [], totalRows: 0 });
+  employeesPagedObs = this.employeesPagedSource.asObservable();
+
   private employeesFromTokenSource = new BehaviorSubject<UserEmployee[]>([]);
   employeesFromTokenObs = this.employeesFromTokenSource.asObservable();
 
@@ -38,9 +45,9 @@ export class EmployeeService {
     });
   }
 
-  getByCompanyId(companyId: string) {
-    return this.http.get<UserEmployee[]>(this.baseUrl + "/employee/GetByCompanyId?companyId=" + companyId).subscribe(data => {
-      this.employeesSource.next(data);
+  getByCompanyId(request: EmployeeGetByCompanyIdRequest) {
+    return this.http.get<UserEmployeePagination>(this.baseUrl + "/employee/GetByCompanyId?companyId=" + request.companyId + "&employeeName=" + request.employeeName + "&page=" + request.page + "&itemsPerPage=" + request.itemsPerPage + "&paged=" + request.paged).subscribe(data => {
+      this.employeesPagedSource.next(data);
     });
   }
 
@@ -94,5 +101,15 @@ export class EmployeeService {
 
   resetPassword(user: User) {
     return this.http.get(this.baseUrl + "/employee/resetPassword?userId=" + user.userId + "&password=" + user.password);
+  }
+
+  exportToExcel(request: EmployeeGetByCompanyIdRequest) {
+    return this.http.get<UserEmployeePagination>(this.baseUrl + "/employee/GetByCompanyId?companyId=" + request.companyId + "&employeeName=" + request.employeeName + "&page=" + request.page + "&itemsPerPage=" + request.itemsPerPage + "&paged=" + request.paged).subscribe(data => {
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data.userEmployees);
+      const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const file: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+      FileSaver.saveAs(file, 'Employees_' + request.companyId + '_' + new Date().getTime() + '.xlsx');
+    });
   }
 }

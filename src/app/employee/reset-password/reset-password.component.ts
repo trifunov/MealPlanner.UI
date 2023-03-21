@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EmployeeGetByCompanyIdRequest } from '../../shared/models/employee-get-by-company-id-request';
 import { User } from '../../shared/models/user';
 import { EmployeeService } from '../../shared/services/employee.service';
 
@@ -40,7 +41,13 @@ export class ResetPasswordComponent implements OnInit {
       user.userId = this.userId;
 
       this.employeeService.resetPassword(user).subscribe(data => {
-        this.employeeService.getByCompanyId(this.route.snapshot.queryParamMap.get('companyId'));
+        var request = new EmployeeGetByCompanyIdRequest();
+        request.companyId = this.route.snapshot.queryParamMap.get('companyId');
+        request.employeeName = '';
+        request.page = 1;
+        request.itemsPerPage = 20;
+        request.paged = true;
+        this.employeeService.getByCompanyId(request);
       });
     }
 

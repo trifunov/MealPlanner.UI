@@ -5,14 +5,18 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeService } from '../shared/services/employee.service';
 import { CreateeditComponent } from './createedit/createedit.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
-
+import { PaginationModule } from '../pagination/pagination.module';
 
 @NgModule({
-  declarations: [ListEmployeeComponent, CreateeditComponent, ResetPasswordComponent],
+  declarations: [
+    ListEmployeeComponent,
+    CreateeditComponent,
+    ResetPasswordComponent
+  ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    PaginationModule
   ],
   providers: [EmployeeService],
   bootstrap: [ListEmployeeComponent]

@@ -33,8 +33,8 @@ export class DateShiftSelectComponent implements OnInit {
         hiddenValue = true;
       }
       this.dates.push({
-        value: moment().locale('mk').add(i, 'days').format('YYYY-MM-DD'),
-        label: moment().locale('mk').add(i, 'days').format('ddd DD MMM YY'),
+        value: moment().locale('mk').add(i-1, 'days').format('YYYY-MM-DD'),
+        label: moment().locale('mk').add(i-1, 'days').format('ddd DD MMM YY'),
         hidden: hiddenValue
       });
     }
